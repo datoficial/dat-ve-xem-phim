@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('mota')->nullable();
             $table->text('trailler')->nullable();
             $table->string('trangthai');
+            $table->string('hinhanh');
             $table->timestamps();
             $table->engine = 'InnoDB';
         });        

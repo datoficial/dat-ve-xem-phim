@@ -10,12 +10,12 @@ class ChiTietVeController extends Controller
     public function getDanhSach()
     {
         $chitietve = ChiTietVe::paginate(25);
-        return view('chitietve.danhsach', compact('chitietve'));
+        return view('admin.chitietve.danhsach', compact('chitietve'));
     }
     public function getThem()
     {
         $ve = Ve::all();
-        return view('chitietve.them', compact('ve'));
+        return view('admin.chitietve.them', compact('ve'));
     }
     public function postThem(Request $request)
     {
@@ -26,13 +26,13 @@ class ChiTietVeController extends Controller
         $orm->soluong = $request->quocgia;
         $orm->giave = $request->mota;
         $orm->save();
-        return redirect()->route('chitietve');
+        return redirect()->route('admin.chitietve');
     }
     public function getSua($id)
     {
         $chitietve = ChiTietVe::find($id);
         $ve = Ve::all();
-        return view('chitietve.sua', compact('chitietve', 've'));
+        return view('admin.chitietve.sua', compact('chitietve', 've'));
     }
     public function postSua(Request $request, $id)
     {
@@ -43,12 +43,12 @@ class ChiTietVeController extends Controller
         $orm->soluong = $request->quocgia;
         $orm->giave = $request->mota;
         $orm->save();
-        return redirect()->route('chitietve');
+        return redirect()->route('admin.chitietve');
     }
     public function getXoa($id)
     {
         $orm = ChiTietVe::find($id);
         $orm->delete();
-        return redirect()->route('chitietve');
+        return redirect()->route('admin.chitietve');
     }
 }

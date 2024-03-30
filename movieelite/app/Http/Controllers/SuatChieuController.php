@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\SuatChieu;
+use App\Models\PhongChieu;
+use App\Models\Phim;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 class SuatChieuController extends Controller
@@ -10,13 +12,13 @@ class SuatChieuController extends Controller
     public function getDanhSach()
     {
         $suatchieu = SuatChieu::paginate(25);
-        return view('suatchieu.danhsach', compact('suatchieu'));
+        return view('admin.suatchieu.danhsach', compact('suatchieu'));
     }
     public function getThem()
     {
-        $suatchieu = PhongChieu::all();
-        $suatchieu = Phim::all();
-        return view('suatchieu.them', compact('suatchieu'));
+        $phongchieu = PhongChieu::all();
+        $phim = Phim::all();
+        return view('admin.suatchieu.them', compact('phongchieu','phim'));
     }
     public function postThem(Request $request)
     {
@@ -27,14 +29,14 @@ class SuatChieuController extends Controller
         $orm->giobatdau = $request->giobatdau;
         $orm->gioketthuc = $request->gioketthuc;
         $orm->save();
-        return redirect()->route('suatchieu');
+        return redirect()->route('admin.suatchieu');
     }
     public function getSua($id)
     {
         $suatchieu = SuatChieu::find($id);
-        $suatchieu = PhongChieu::all();
-        $suatchieu = Phim::all();
-        return view('suatchieu.sua', compact('suatchieu', 'phongchieu','phim'));
+        $phongchieu = PhongChieu::all();
+        $phim = Phim::all();
+        return view('admin.suatchieu.sua', compact('suatchieu', 'phongchieu','phim'));
     }
     public function postSua(Request $request, $id)
     {
@@ -45,12 +47,12 @@ class SuatChieuController extends Controller
         $orm->giobatdau = $request->giobatdau;
         $orm->gioketthuc = $request->gioketthuc;
         $orm->save();
-        return redirect()->route('suatchieu');
+        return redirect()->route('admin.suatchieu');
     }
     public function getXoa($id)
     {
         $orm = SuatChieu::find($id);
         $orm->delete();
-        return redirect()->route('suatchieu');
+        return redirect()->route('admin.suatchieu');
     }
 }

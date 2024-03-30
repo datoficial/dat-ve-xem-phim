@@ -11,11 +11,11 @@ class RapChieuController extends Controller
     public function getDanhSach()
     {
         $rapchieu = RapChieu::all();
-        return view('rapchieu.danhsach', compact('rapchieu'));
+        return view('admin.rapchieu.danhsach', compact('rapchieu'));
     }
     public function getThem()
     {
-        return view('rapchieu.them');
+        return view('admin.rapchieu.them');
     }
     public function postThem(Request $request)
     {
@@ -28,12 +28,12 @@ class RapChieuController extends Controller
         $orm->tenrap_slug = Str::slug($request->tenrap, '-');
         $orm->diachi = $request->diachi;
         $orm->save();
-        return redirect()->route('rapchieu');
+        return redirect()->route('admin.rapchieu');
     }
     public function getSua($id)
     {
         $rapchieu = RapChieu::find($id);
-        return view('rapchieu.sua', compact('rapchieu'));
+        return view('admin.rapchieu.sua', compact('rapchieu'));
     }
     public function postSua(Request $request, $id)
     {
@@ -46,11 +46,11 @@ class RapChieuController extends Controller
         $orm->tenrap_slug = Str::slug($request->tenrap, '-');
         $orm->diachi = $request->diachi;
         $orm->save();
-        return redirect()->route('rapchieu');
+        return redirect()->route('admin.rapchieu');
     }
     public function getXoa($id)
     {
         $orm = RapChieu::find($id);$orm->delete();
-        return redirect()->route('rapchieu');
+        return redirect()->route('admin.rapchieu');
     }
 }

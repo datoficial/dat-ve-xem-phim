@@ -34,6 +34,11 @@ return new class extends Migration
             $table->timestamp('created_at')->nullable();
             $table->engine = 'InnoDB';
         });
+        Schema::create('cache', function ($table) {
+            $table->string('key', 50)->unique(); // Set maximum length to 255 characters
+            $table->text('value');
+            $table->integer('expiration');
+        });
     }
 
     /**

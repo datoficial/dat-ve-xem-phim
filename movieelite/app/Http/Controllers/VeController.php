@@ -11,13 +11,13 @@ class VeController extends Controller
     public function getDanhSach()
     {
         $ve = Ve::paginate(25);
-        return view('ve.danhsach', compact('ve'));
+        return view('admin.ve.danhsach', compact('ve'));
     }
     public function getThem()
     {
         $ve = User::all();
         $ve = SuatChieu::all();
-        return view('ve.them', compact('ve'));
+        return view('admin.ve.them', compact('ve'));
     }
     public function postThem(Request $request)
     {
@@ -25,14 +25,14 @@ class VeController extends Controller
         $orm->user_id = $request->user_id;
         $orm->suatchieu_id = $request->suatchieu_id;
         $orm->save();
-        return redirect()->route('ve');
+        return redirect()->route('admin.ve');
     }
     public function getSua($id)
     {
         $ve = Ve::find($id);
         $ve = User::all();
         $ve = SuatChieu::all();
-        return view('ve.sua', compact('ve', 'nguoidung','suatchieu'));
+        return view('admin.ve.sua', compact('ve', 'nguoidung','suatchieu'));
     }
     public function postSua(Request $request, $id)
     {
@@ -40,12 +40,12 @@ class VeController extends Controller
         $orm->user_id = $request->user_id;
         $orm->suatchieu_id = $request->suatchieu_id;
         $orm->save();
-        return redirect()->route('ve');
+        return redirect()->route('admin.ve');
     }
     public function getXoa($id)
     {
         $orm = Ve::find($id);
         $orm->delete();
-        return redirect()->route('ve');
+        return redirect()->route('admin.ve');
     }
 }

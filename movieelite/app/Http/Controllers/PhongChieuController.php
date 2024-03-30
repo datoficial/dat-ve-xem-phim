@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PhongChieu;
+use App\Models\RapChieu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -11,12 +12,12 @@ class PhongChieuController extends Controller
     public function getDanhSach()
     {
         $phongchieu = PhongChieu::paginate(25);
-        return view('phongchieu.danhsach', compact('phongchieu'));
+        return view('admin.phongchieu.danhsach', compact('phongchieu'));
     }
     public function getThem()
     {
-        $phongchieu = RapChieu::all();
-        return view('phongchieu.them', compact('phongchieu'));
+        $rapchieu = RapChieu::all();
+        return view('admin.phongchieu.them', compact('rapchieu'));
     }
     public function postThem(Request $request)
     {
@@ -29,13 +30,13 @@ class PhongChieuController extends Controller
         $orm->tenphong = $request->tenphong;
         $orm->tenphong_slug = Str::slug($request->tenphong, '-');
         $orm->save();
-        return redirect()->route('phongchieu');
+        return redirect()->route('admin.phongchieu');
     }
     public function getSua($id)
     {
         $phongchieu = PhongChieu::find($id);
-        $phongchieu = RapChieu::all();
-        return view('phongchieu.sua', compact('phongchieu', 'rapchieu'));
+        $rapchieu = RapChieu::all();
+        return view('admin.phongchieu.sua', compact('phongchieu', 'rapchieu'));
     }
     public function postSua(Request $request, $id)
     {
@@ -48,12 +49,12 @@ class PhongChieuController extends Controller
         $orm->tenphong = $request->tenphong;
         $orm->tenphong_slug = Str::slug($request->tenphong, '-');
         $orm->save();
-        return redirect()->route('phongchieu');
+        return redirect()->route('admin.phongchieu');
     }
     public function getXoa($id)
     {
         $orm = PhongChieu::find($id);
         $orm->delete();
-        return redirect()->route('phongchieu');
+        return redirect()->route('admin.phongchieu');
     }
 }

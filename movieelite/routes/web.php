@@ -11,12 +11,13 @@ use App\Http\Controllers\ChiTietVeController;
 use App\Http\Controllers\ChuDeController;
 use App\Http\Controllers\BaiVietController;
 use App\Http\Controllers\BinhLuanController;
+use App\Http\Controllers\KhachHangController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 
 Auth::routes();
 
-
-    Route::name('frontend.')->group(function() {
+Route::name('frontend.')->group(function() {
         // Trang chủ
         Route::get('/', [HomeController::class, 'getHome'])->name('home');
         Route::get('/home', [HomeController::class, 'getHome'])->name('home');
@@ -35,17 +36,16 @@ Auth::routes();
     // Trang khách hàng
     Route::get('/khach-hang/dang-ky', [HomeController::class, 'getDangKy'])->name('user.dangky');
     Route::get('/khach-hang/dang-nhap', [HomeController::class, 'getDangNhap'])->name('user.dangnhap');
+ 
+    Route::get('/datve', [VeController::class, 'getDatVe'])->name('user.datve');
+    Route::get('/datve', [VeController::class, 'postDatVe'])->name('user.datve');
+    
 
     // Trang tài khoản khách hàng
-    Route::prefix('khach-hang')->name('user.')->middleware(['auth','user'])->group(function() {
+    Route::prefix('khach-hang')->name('user.')->group(function() {
         // Trang chủ
         Route::get('/', [KhachHangController::class, 'getHome'])->name('home');
         Route::get('/home', [KhachHangController::class, 'getHome'])->name('home');
-        // Đặt hàng
-        Route::get('/dat-ve', [KhachHangController::class, 'getDatVe'])->name('datve');
-        Route::post('/dat-ve', [KhachHangController::class, 'postDatVe'])->name('datve');
-
-        Route::get('/dat-ve-thanh-cong', [KhachHangController::class, 'getDatVeThanhCong'])->name('datvethanhcong');
         // Xem và cập nhật trạng thái đơn hàng
         Route::get('/ve-cua-toi', [KhachHangController::class, 'getDonVe'])->name('xemve');
         Route::get('/ve-cua-toi/{id}', [KhachHangController::class, 'getDonVe'])->name('xemve.chitiet');
@@ -56,8 +56,7 @@ Auth::routes();
         // Đăng xuất
         Route::post('/dang-xuat', [KhachHangController::class, 'postDangXuat'])->name('dangxuat');
     });
-Route::prefix('admin')->name('admin.')->middleware(['auth','manager'])->group(function() {
-
+Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('/', [AdminController::class, 'getHome'])->name('home');
     Route::get('/home', [AdminController::class, 'getHome'])->name('home');
 
