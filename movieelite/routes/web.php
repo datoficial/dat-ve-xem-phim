@@ -39,20 +39,11 @@ Route::name('frontend.')->group(function() {
     Route::get('/khach-hang/dang-ky', [HomeController::class, 'getDangKy'])->name('user.dangky');
     Route::get('/khach-hang/dang-nhap', [HomeController::class, 'getDangNhap'])->name('user.dangnhap');
  
-    Route::prefix('dat-ve')->name('datve.')->group(function() {
-        Route::get('/chon-suat-chieu/{phim_id}', [DatVeController::class, 'getSuatChieu'])->name('chonsuatchieu');
-        Route::post('/chon-suat-chieu/{phim_id}', [DatVeController::class, 'postSuatChieu'])->name('chonsuatchieu');
-    
-        // Route cho bước chọn ghế ngồi
-        Route::get('/chon-ghe/{phim_id}', [DatVeController::class, 'getChonGhe'])->name('chonghe');
-        Route::post('/chon-ghe/{phim_id}', [DatVeController::class, 'postChonGhe'])->name('chonghe');
-    
-        // Route cho bước thanh toán
-        Route::get('/thanh-toan', [DatVeController::class, 'thanhToan'])->name('thanhtoan');
-        Route::post('/thanh-toan', [DatVeController::class, 'postThanhToan'])->name('thanhtoan');
-    
-        // Route cho bước xem vé
-        Route::get('/xem-ve', [DatVeController::class, 'getXemVe'])->name('xemve');
+    Route::prefix('khach-hang')->name('booking.')->group(function() {
+        // routes/web.php
+        Route::get('/dat-ve/{phim_id}', [DatVeController::class, 'getDatVe'])->name('datve');
+            Route::post('/dat-ve/{phim_id}', [DatVeController::class, 'postDatVe'])->name('datve');
+
     });
     
     // Trang tài khoản khách hàng

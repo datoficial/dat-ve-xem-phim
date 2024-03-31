@@ -131,5 +131,6 @@
 		});
 	</script>
 	<script src="{{ asset('public/assets/js/bootstrap.min.js') }}"></script>
+	@yield('javascript')
     </body>
 </html>
