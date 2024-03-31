@@ -1,7 +1,6 @@
 @extends('layouts.frontend')
 @section('title', 'Trang chủ')
 @section('content')
-
 	<section class="w3l-main-slider position-relative" id="home">
 		<div class="companies20-content">
 			<div class="owl-one owl-carousel owl-theme">
@@ -57,7 +56,7 @@
                         <div class="item vhny-grid">
 							@foreach($value->Phim as $p)
                             <div class="box16 mb-0">
-                                    <a href="movie.html">
+                                    <a href="{{ route('datve.chonsuatchieu',['phim_id' => $p->id]) }}">
                                         <figure>
                                             <img class="img-fluid" src="{{ env('APP_URL') . '/storage/app/' . $p->hinhanh }}" alt="">
                                         </figure>
@@ -80,7 +79,7 @@
                                         <span class="fa fa-play video-icon" aria-hidden="true"></span>
                                     </a>
                                 </div>
-                                <h3><a class="title-gd" href="{{ route('user.datve') }}">{{ $p->tenphim }}</a></h3>
+                                <h3><a class="title-gd" href="{{ route('datve.chonsuatchieu',['phim_id' => $p->id]) }}">{{ $p->tenphim }}</a></h3>
 								@php
 								if (!function_exists('str_limit_words')) {
 									function str_limit_words($string, $limit = 20, $end = '...') {
@@ -94,7 +93,7 @@
 								@endphp
                                 <p>{{ str_limit_words($p->mota, 20) }}</p>
                                 <div class="button-center text-center mt-4">
-                                    <a href="{{ route('user.datve') }}" class="btn watch-button">Đặt vé ngay</a>
+                                    <a href="{{ route('datve.chonsuatchieu',['phim_id' => $p->id]) }}" class="btn watch-button">Đặt vé ngay</a>
                                 </div>
                             </div>
 						@endforeach
@@ -118,7 +117,7 @@
 							<h3 class="hny-title">{{ $value->tenloai }}</h3>
 						</div>
 						<div class="headerhny-right text-lg-right">
-							<h4><a class="show-title" href="movies.html">Xem tất cả</a></h4>
+							<h4><a class="show-title" href="{{ route('datve.chonsuatchieu',['phim_id' => $p->id]) }}">Xem tất cả</a></h4>
 						</div>
 					</div>
 				</div>
@@ -136,7 +135,7 @@
                 @endphp
 
                 <div class="product-item">
-                    <a href="movies.html">
+                    <a href="{{ route('datve.chonsuatchieu',['phim_id' => $p->id]) }}">
                         <div class="product-image">
                             <img class="product-image" src="{{ env('APP_URL') . '/storage/app/' . $p->hinhanh }}" alt="{{ $p->tenphim }}">
                         </div>

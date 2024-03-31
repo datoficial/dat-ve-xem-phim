@@ -13,6 +13,7 @@ use App\Http\Controllers\BaiVietController;
 use App\Http\Controllers\BinhLuanController;
 use App\Http\Controllers\KhachHangController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DatVeController;
 use App\Http\Controllers\UserController;
 
 Auth::routes();
@@ -31,16 +32,29 @@ Route::name('frontend.')->group(function() {
         Route::get('/bai-viet/{tenchude_slug}/{tieude_slug}', [HomeController::class, 'getBaiViet_ChiTiet'])->name('baiviet.chitiet');
         // Liên hệ
         Route::get('/lien-he', [HomeController::class, 'getLienHe'])->name('lienhe');
+
     });
 
     // Trang khách hàng
     Route::get('/khach-hang/dang-ky', [HomeController::class, 'getDangKy'])->name('user.dangky');
     Route::get('/khach-hang/dang-nhap', [HomeController::class, 'getDangNhap'])->name('user.dangnhap');
  
-    Route::get('/datve', [VeController::class, 'getDatVe'])->name('user.datve');
-    Route::get('/datve', [VeController::class, 'postDatVe'])->name('user.datve');
+    Route::prefix('dat-ve')->name('datve.')->group(function() {
+        Route::get('/chon-suat-chieu/{phim_id}', [DatVeController::class, 'getSuatChieu'])->name('chonsuatchieu');
+        Route::post('/chon-suat-chieu/{phim_id}', [DatVeController::class, 'postSuatChieu'])->name('chonsuatchieu');
     
-
+        // Route cho bước chọn ghế ngồi
+        Route::get('/chon-ghe/{phim_id}', [DatVeController::class, 'getChonGhe'])->name('chonghe');
+        Route::post('/chon-ghe/{phim_id}', [DatVeController::class, 'postChonGhe'])->name('chonghe');
+    
+        // Route cho bước thanh toán
+        Route::get('/thanh-toan', [DatVeController::class, 'thanhToan'])->name('thanhtoan');
+        Route::post('/thanh-toan', [DatVeController::class, 'postThanhToan'])->name('thanhtoan');
+    
+        // Route cho bước xem vé
+        Route::get('/xem-ve', [DatVeController::class, 'getXemVe'])->name('xemve');
+    });
+    
     // Trang tài khoản khách hàng
     Route::prefix('khach-hang')->name('user.')->group(function() {
         // Trang chủ
