@@ -17,8 +17,4 @@ class Ve extends Model
     {
         return $this->belongsTo(SuatChieu::class, 'suatchieu_id', 'id');
     }
-    public function ChiTietVe(): HasMany
-    {
-        return $this->hasMany(ChiTietVe::class, 'chitietve_id', 'id');
-    }
 }

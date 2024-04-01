@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('suatchieu_id')->constrained('suatchieu');
+            $table->date('ngayban');
+            $table->string('tenghe');
+            $table->integer('soluong');
+            $table->double('giave');
             $table->timestamps();
             $table->engine = 'InnoDB';
         }); 

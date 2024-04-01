@@ -7,7 +7,6 @@ use App\Http\Controllers\RapChieuController;
 use App\Http\Controllers\PhongChieuController;
 use App\Http\Controllers\SuatChieuController;
 use App\Http\Controllers\VeController;
-use App\Http\Controllers\ChiTietVeController;
 use App\Http\Controllers\ChuDeController;
 use App\Http\Controllers\BaiVietController;
 use App\Http\Controllers\BinhLuanController;
@@ -42,8 +41,8 @@ Route::name('frontend.')->group(function() {
     Route::prefix('khach-hang')->name('booking.')->group(function() {
         // routes/web.php
         Route::get('/dat-ve/{phim_id}', [DatVeController::class, 'getDatVe'])->name('datve');
-            Route::post('/dat-ve/{phim_id}', [DatVeController::class, 'postDatVe'])->name('datve');
-
+        Route::get('/dat-ve', [DatVeController::class, 'getLayDuLieu'])->name('chonghe');
+        Route::post('/dat-ve/{phim_id}', [DatVeController::class, 'postDatVe'])->name('datve');
     });
     
     // Trang tài khoản khách hàng
@@ -116,12 +115,6 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::post('/ve/sua/{id}', [VeController::class, 'postSua'])->name('ve.sua');
     Route::get('/ve/xoa/{id}', [VeController::class, 'getXoa'])->name('ve.xoa');
 
-    Route::get('/chitietve', [ChiTietVeController::class, 'getDanhSach'])->name('chitietve');
-    Route::get('/chitietve/them', [ChiTietVeController::class, 'getThem'])->name('chitietve.them');
-    Route::post('/chitietve/them', [ChiTietVeController::class, 'postThem'])->name('chitietve.them');
-    Route::get('/chitietve/sua/{id}', [ChiTietVeController::class, 'getSua'])->name('chitietve.sua');
-    Route::post('/chitietve/sua/{id}', [ChiTietVeController::class, 'postSua'])->name('chitietve.sua');
-    Route::get('/chitietve/xoa/{id}', [ChiTietVeController::class, 'getXoa'])->name('chitietve.xoa');
 
 
     Route::get('/chude', [ChuDeController::class, 'getDanhSach'])->name('chude');

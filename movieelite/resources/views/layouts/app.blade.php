@@ -60,9 +60,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.ve') }}"><i class="bi bi-ticket"></i> Vé</a>
                             </li>                            
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.chitietve') }}"><i class="bi bi-card-checklist"></i>Chi tiết Vé</a>
-                            </li>
 </ul>
 </li>
                     

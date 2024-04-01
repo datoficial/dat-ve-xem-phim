@@ -19,12 +19,12 @@
     <div class="row">
       <div class="col">
         <div class="px-0 pt-4 pb-0 mt-3 mb-3">
-          <form id="form">
+         <form id="form"> 
             <ul id="progressbar" class="progressbar-class">
-              <li class="active" id="step1">Show timing selection</li>
-              <li id="step2" class="not_active">Seat Selection</li>
-              <li id="step3" class="not_active">Payment</li>
-              <li id="step4" class="not_active">E-Ticket</li>
+              <li class="active" id="step1">Chọn lịch chiếu</li>
+              <li id="step2" class="not_active">Chọn ghế ngồi</li>
+              <li id="step3" class="not_active">Thanh Toán</li>
+              <li id="step4" class="not_active">Vé của bạn</li>
             </ul>
             <br>
             <fieldset>
@@ -32,41 +32,42 @@
                   <h2>Chọn ngày chiếu</h2>
                       <div class="carousel carousel-nav" data-flickity='{"contain": true, "pageDots": false }'>
                       @php
-                            $ngaychieu_da_xuat_hien = []; // Mảng để lưu trữ các ngày chiếu đã xuất hiện
-                        @endphp
+                            $ngaychieu_da_xuat_hien = []; 
+                      @endphp
                       @foreach($suatchieu->sortBy('ngaychieu') as $suat)
-                      @php
-                              $ngaychieu = $suat->ngaychieu;
-                              $today = \Carbon\Carbon::today()->toDateString(); // Lấy ngày hôm nay dưới dạng chuỗi YYYY-MM-DD
-                          @endphp
-                          @if ($ngaychieu >= $today && !in_array($ngaychieu, $ngaychieu_da_xuat_hien))
-                              @php
-                                  $ngaychieu_da_xuat_hien[] = $ngaychieu; 
-                              @endphp
-                          <div class="carousel-cell" id="{{ $suat->id }}" onclick="myFunction({{ $suat->id }})">
-                              <div class="date-numeric">{{ $suat->ngaychieu }}</div>
-                          </div>
-                          @endif
-                      @endforeach
+                            @php
+                                $ngaychieu = $suat->ngaychieu;
+                                $giobatdau = $suat->giobatdau;
+                                $today = \Carbon\Carbon::today()->toDateString();
+                            @endphp
+                            @if ($ngaychieu >= $today && !in_array($ngaychieu, $ngaychieu_da_xuat_hien))
+                                @php
+                                    $ngaychieu_da_xuat_hien[] = $ngaychieu; 
+                                @endphp
+                                <div class="carousel-cell" id="{{ $suat->id }}" data-ngaychieu="{{ $ngaychieu }}" onclick="myFunction({{ $suat->id }}); selectDate('{{ $ngaychieu }}')">
+                                  <div class="date-numeric">{{ $suat->ngaychieu }}</div>
+                                </div>
+                              @endif
+                              @endforeach
                       </div>
                       <ul class="time-ul" id="time-ul">
-                          <!-- Giờ chiếu sẽ được thêm bằng JavaScript -->
+                      
                       </ul>
               </div>
               <input id="screen-next-btn" type="button" name="next-step" class="next-step" value="Continue Booking" disabled />
-          </fieldset>
+            </fieldset>
 
             <fieldset>
-
               <div>
                 <iframe id="seat-sel-iframe"
                   style="  box-shadow: 0 14px 12px 0 var(--theme-border), 0 10px 50px 0 var(--theme-border); width: 800px; height: 550px; display: block; margin-left: auto; margin-right: auto;"
-                  src="public/seat_selection/seat_sel.html"></iframe>
+                  src="{{ route('booking.chonghe')}}"></iframe>
               </div>
               <br>
               <input type="button" name="next-step" class="next-step" value="Proceed to Payment" />
               <input type="button" name="previous-step" class="previous-step" value="Back" />
             </fieldset>
+
             <fieldset>
               <!-- Payment Page -->
               <div id="payment_div">
@@ -75,7 +76,7 @@
                     <div class="payment-container">
                       <div class="payment-row">
                         <div class="col-50">
-                          <h3 id="payment-h3">Payment</h3>
+                          <h3 id="payment-h3">Thanh Toán</h3>
                           <div class="payment-row payment">
                             <div class="col-50 payment">
                               <label for="card" class="method card">
@@ -143,6 +144,8 @@
               <input type="button" name="previous-step" class="cancel-pay-btn" value="Cancel Payment"
                 onclick="location.href='index.html';" />
             </fieldset>
+
+
             <fieldset>
               <h2>E-Ticket</h2>
               <div class="ticket-body">
@@ -334,7 +337,7 @@
                 </div>
               </div>
               <input type="button" name="previous-step" class="home-page-btn" value="Browse to Home Page"
-                onclick="location.href='index.html';" />
+              onclick="window.location.href = '{{ route('frontend.home') }}'" />
             </fieldset>
           </form>
         </div>
@@ -369,21 +372,40 @@
 
 <script type="text/javascript" src="{{ asset('public/assets/js/ticket-booking.js')}}"></script>
 <script>
-function myFunction(selectedDate) {
-    // Xóa tất cả các thẻ <li> hiện có
-    document.getElementById('time-ul').innerHTML = '';
+   function selectDate(ngaychieu) {
+    var timeList = document.getElementById('time-ul');
+    timeList.innerHTML = '';
 
-    // Lặp qua tất cả các suất chiếu
-    @foreach($suatchieu as $sc)
-        // Nếu ngày chiếu của suất chiếu trùng với ngày được chọn
-        @if($sc->ngaychieu == selectedDate)
-            // Thêm một thẻ <li> mới chứa giờ bắt đầu
-            var li = document.createElement('li');
-            li.className = 'time-li';
-            li.innerHTML = `<div class="screens">Giờ chiếu</div><div class="time-btn"><button class="screen-time" onclick="timeFunction()">{{ $sc->giobatdau }}</button></div>`;
-            document.getElementById('time-ul').appendChild(li);
-        @endif
-    @endforeach
+    var giochieuList = {!! json_encode($suatchieu->toArray()) !!};
+    var filteredGiochieu = giochieuList.filter(function(giochieu) {
+        return giochieu.ngaychieu === ngaychieu;
+    });
+
+    filteredGiochieu.forEach(function(giochieu) {
+        var giobatdau = new Date('2000-01-01T' + giochieu.giobatdau);
+        var options = { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'Asia/Ho_Chi_Minh' };
+        giobatdau = giobatdau.toLocaleTimeString('en-US', options);
+        var li = document.createElement('li');
+        li.className = 'time-li';
+        li.innerHTML = `
+            <div class="screens">
+                ${giochieu.phongchieu.tenphong}
+            </div>
+            <div class="time-btn">
+                <button class="screen-time" onclick="timeFunction('${giobatdau}')">
+                    ${giobatdau}
+                </button>
+            </div>`;
+        timeList.appendChild(li);
+    });
 }
 </script>
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            var firstNgaychieu = document.querySelector('.carousel-cell').dataset.ngaychieu;
+
+            selectDate(firstNgaychieu);
+        });
+    </script>
 @endsection
