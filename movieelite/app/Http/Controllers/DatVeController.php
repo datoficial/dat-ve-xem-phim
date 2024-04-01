@@ -24,10 +24,17 @@ class DatVeController extends Controller
             return redirect()->route('user.dangnhap');
         }
     }
-    public function getChonGhe(Request $request)
-    {
-        return view("booking.chonghe");
-    }
+// Trong hàm getChonGhe của bạn
+public function getChonGhe(Request $request)
+{
+    $ve = Ve::all();
+    $ve_data = $ve->pluck('tenghe')->toArray();
+
+    // Lấy danh sách các ghế đã chọn từ cơ sở dữ liệu
+    $ghes_da_chon = Ve::pluck('tenghe')->toArray();
+
+    return view("booking.chonghe", compact('ve', 've_data', 'ghes_da_chon'));
+}
 
     public function postDatVe(Request $request)
     {
