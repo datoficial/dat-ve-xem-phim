@@ -24,12 +24,15 @@ class DatVeController extends Controller
             return redirect()->route('user.dangnhap');
         }
     }
+    public function getChonGhe(Request $request)
+    {
+        return view("booking.chonghe");
+    }
+
     public function postDatVe(Request $request)
     {
-
         // Tạo một đối tượng vé mới
         $ve = new Ve();
-
         $ve->user_id = Auth::id(); 
         $ve->suatchieu_id = $request->suatchieu_id; 
         $ve->ngayban = now();
@@ -38,6 +41,10 @@ class DatVeController extends Controller
         $ve->giave = $request->giave; 
         $ve->save();
 
-        return redirect()->route('frontend.home');
+        return redirect()->route('booking.datvethanhcong');
+    }
+    public function getDatVeThanhCong()
+    {   
+        return view('booking.datvethanhcong');
     }
 }

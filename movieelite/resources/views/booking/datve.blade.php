@@ -19,7 +19,8 @@
     <div class="row">
       <div class="col">
         <div class="px-0 pt-4 pb-0 mt-3 mb-3">
-         <form id="form"> 
+        <form id="form" method="POST" action="{{ route('booking.datve', ['phim_id' => $phim->id]) }}">
+        @csrf
             <ul id="progressbar" class="progressbar-class">
               <li class="active" id="step1">Chọn lịch chiếu</li>
               <li id="step2" class="not_active">Chọn ghế ngồi</li>
@@ -44,7 +45,7 @@
                                 @php
                                     $ngaychieu_da_xuat_hien[] = $ngaychieu; 
                                 @endphp
-                                <div class="carousel-cell" id="{{ $suat->id }}" data-ngaychieu="{{ $ngaychieu }}" onclick="myFunction({{ $suat->id }}); selectDate('{{ $ngaychieu }}')">
+                                <div class="carousel-cell" id="{{ $suat->id }}" data-ngaychieu="{{ $ngaychieu }}" onclick="myFunction({{ $suat->id }}); selectDate('{{ $ngaychieu }}');">
                                   <div class="date-numeric">{{ $suat->ngaychieu }}</div>
                                 </div>
                               @endif
@@ -58,16 +59,15 @@
             </fieldset>
 
             <fieldset>
-              <div>
-                <iframe id="seat-sel-iframe"
-                  style="  box-shadow: 0 14px 12px 0 var(--theme-border), 0 10px 50px 0 var(--theme-border); width: 800px; height: 550px; display: block; margin-left: auto; margin-right: auto;"
-                  src="{{ route('booking.chonghe')}}"></iframe>
-              </div>
-              <br>
-              <input type="button" name="next-step" class="next-step" value="Proceed to Payment" />
-              <input type="button" name="previous-step" class="previous-step" value="Back" />
-            </fieldset>
-
+    <div>
+        <iframe id="seat-sel-iframe"
+            style="box-shadow: 0 14px 12px 0 var(--theme-border), 0 10px 50px 0 var(--theme-border); width: 800px; height: 550px; display: block; margin-left: auto; margin-right: auto;"
+            src="{{ route('booking.chonghe') }}"></iframe>
+    </div>
+    <br>
+    <input type="button" name="next-step" class="next-step" value="Proceed to Payment" />
+    <input type="button" name="previous-step" class="previous-step" value="Back" />
+  </fieldset>
             <fieldset>
               <!-- Payment Page -->
               <div id="payment_div">
@@ -88,7 +88,7 @@
                                 </div>
                                 <div class="radio-input">
                                   <input type="radio" id="card" />
-                                  Pay RS.200.00 with credit card
+                                  Pay  with credit card
                                 </div>
                               </label>
                             </div>
@@ -99,12 +99,11 @@
                                 </div>
                                 <div class="radio-input">
                                   <input id="paypal" type="radio" checked>
-                                  Pay $30.00 with PayPal
+                                  Pay with PayPal
                                 </div>
                               </label>
                             </div>
                           </div>
-
                           <div class="payment-row">
                             <div class="col-50">
                               <label for="cname">Cardholder's Name</label>
@@ -142,7 +141,7 @@
               </div>
               <input type="button" name="next-step" class="next-step pay-btn" value="Confirm Payment" />
               <input type="button" name="previous-step" class="cancel-pay-btn" value="Cancel Payment"
-                onclick="location.href='index.html';" />
+                onclick="location.href='"(route('fontend.home')"';" />
             </fieldset>
 
 
@@ -336,9 +335,16 @@
                   </div>
                 </div>
               </div>
-              <input type="button" name="previous-step" class="home-page-btn" value="Browse to Home Page"
-              onclick="window.location.href = '{{ route('frontend.home') }}'" />
+              <input type="submit" name="previous-step" class="home-page-btn" value="Browse to Home Page"/>
             </fieldset>
+            <input type="hidden" name="suatchieu_id" id="suatchieu_id">
+            <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+            <!-- Các trường input cho thông tin ghế -->
+            <input type="hidden" name="giobatdau_submit" id="giobatdau_submit">
+            <input type="hidden" name="ngaychieu_submit" id="ngaychieu_submit">
+            <input type="hidden" name="tenghe" id="tenghe">
+            <input type="hidden" name="soluong" id="soluong">
+            <input type="hidden" name="giave" id="giave">
           </form>
         </div>
       </div>
@@ -392,13 +398,18 @@
                 ${giochieu.phongchieu.tenphong}
             </div>
             <div class="time-btn">
-                <button class="screen-time" onclick="timeFunction('${giobatdau}')">
+                <button class="screen-time" onclick="timeFunction('${giobatdau}')" data-giobatdau="${giobatdau}">
                     ${giobatdau}
                 </button>
             </div>`;
         timeList.appendChild(li);
+        document.getElementById('giobatdau_submit').value = giobatdau;
+        document.getElementById('ngaychieu_submit').value = ngaychieu;
+        document.getElementById('suatchieu_id').value = giochieu.id; // Gán suatchieu_id tại đây
     });
 }
+
+
 </script>
 <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -408,4 +419,50 @@
             selectDate(firstNgaychieu);
         });
     </script>
+<script>
+    window.addEventListener('message', function(event) {
+        var data = event.data;
+        var tenghe = data.tenghe;
+        var soluong = data.soluong;
+        var giave = data.giave;
+        
+        // Update form fields or perform other actions
+        document.getElementById('tenghe').value = tenghe;
+        document.getElementById('soluong').value = soluong;
+        document.getElementById('giave').value = giave;
+    });
+</script>
+<script>
+    // Lấy phần tử cha của bước thanh toán hiện tại
+    var paymentDiv = document.getElementById('payment_div');
+    // Thay thế nội dung của phần tử cha bằng nội dung mới
+    paymentDiv.innerHTML = `
+        <div class="payment-row">
+            <div class="col-75">
+                <div class="payment-container">
+                    <div class="payment-row">
+                        <div class="col-50">
+                            <h3 id="payment-h3">Thanh Toán</h3>
+                            <div class="payment-row">
+                              <div class="col-50">
+                                  <label for="total1">Total Amount:</label>
+                                  <input type="text" id="total1" name="total1" placeholder="Nhập tài khoản thanh toán" required />
+                              </div>
+                              <div class="col-50">
+                                  <label for="payment-method">Thanh toán qua:</label>
+                                  <select id="payment-method" name="payment-method" required>
+                                      <option value="credit-card">Credit Card</option>
+                                      <option value="paypal">PayPal</option>
+                                      <option value="cash">Cash</option>
+                                  </select>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+</script>
+
 @endsection

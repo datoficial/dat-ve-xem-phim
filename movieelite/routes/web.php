@@ -41,8 +41,9 @@ Route::name('frontend.')->group(function() {
     Route::prefix('khach-hang')->name('booking.')->group(function() {
         // routes/web.php
         Route::get('/dat-ve/{phim_id}', [DatVeController::class, 'getDatVe'])->name('datve');
-        Route::get('/dat-ve', [DatVeController::class, 'getLayDuLieu'])->name('chonghe');
+        Route::get('/dat-ve', [DatVeController::class, 'getChonGhe'])->name('chonghe');
         Route::post('/dat-ve/{phim_id}', [DatVeController::class, 'postDatVe'])->name('datve');
+        Route::get('/dat-ve-thanh-cong', [DatVeController::class, 'getDatVeThanhCong'])->name('datvethanhcong');
     });
     
     // Trang tài khoản khách hàng
