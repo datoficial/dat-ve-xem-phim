@@ -8,6 +8,9 @@ use App\Models\SuatChieu;
 use App\Models\Ve;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Milon\Barcode\DNS1D;
+use Milon\Barcode\DNS2D;
 
 class DatVeController extends Controller
 {
@@ -15,7 +18,8 @@ class DatVeController extends Controller
     public function getDatVe(Request $request, $phim_id)
     {
         if(Auth::check()) {
-            $phim = Phim::find($phim_id);
+            // Selecting specific columns using the select method
+            $phim = Phim::select('id', 'tenphim', 'hinhanh')->find($phim_id);
             
             $suatchieu = SuatChieu::with('phongchieu')->where('phim_id', $phim_id)->get();
         
@@ -24,17 +28,13 @@ class DatVeController extends Controller
             return redirect()->route('user.dangnhap');
         }
     }
-// Trong hàm getChonGhe của bạn
-public function getChonGhe(Request $request)
-{
-    $ve = Ve::all();
-    $ve_data = $ve->pluck('tenghe')->toArray();
+    public function getChonGhe(Request $request)
+    {
 
-    // Lấy danh sách các ghế đã chọn từ cơ sở dữ liệu
-    $ghes_da_chon = Ve::pluck('tenghe')->toArray();
+        return view("booking.chonghe");
+    }
 
-    return view("booking.chonghe", compact('ve', 've_data', 'ghes_da_chon'));
-}
+
 
     public function postDatVe(Request $request)
     {
@@ -46,12 +46,40 @@ public function getChonGhe(Request $request)
         $ve->tenghe = $request->tenghe; 
         $ve->soluong = $request->soluong; 
         $ve->giave = $request->giave; 
-        $ve->save();
+    
+        // Kiểm tra xem vé có được lưu vào cơ sở dữ liệu thành công không
+        if ($ve->save()) {
+            // Tạo mã vạch cho vé
+            $barcode = new DNS1D();
+            $barcode->setStorPath(public_path('qrcodes')); // Đặt đường dẫn lưu trữ mã vạch
+    
+            $barcodeData = strval($ve->id); // Chuyển đổi số nguyên thành chuỗi
+            $barcodeFilename = $ve->id . '.png'; // Giữ nguyên số nguyên
+            
+            $barcode->getBarcodePNGPath($barcodeData, 'C128', 3, 33, array(1,1,1), true); // Tạo mã vạch và lưu vào tệp PNG
+    
+            $ve->qrcode = $barcodeFilename; // Lưu đường dẫn tới tệp mã vạch vào cơ sở dữ liệu
+    
+            // Lưu vé vào cơ sở dữ liệu
+            $ve->save();
+        } else {
+            // Xử lý lỗi khi không thể lưu vé vào cơ sở dữ liệu
+             return response()->json(['error' => 'Không thể lưu vé vào cơ sở dữ liệu'], 500);
+        }
+    
+        // Chuyển hướng đến hàm getDatVeThanhCong và truyền đường dẫn tới ảnh QR code
+        return $this->getDatVeThanhCong($ve->qrcode);
+    }
+    
+    public function getDatVeThanhCong($qrCodeFileName)
+    {
+        // Xây dựng đường dẫn đến ảnh QR code trong thư mục public/qrcodes
+        $qrCodePath = asset('qrcodes\\' . $qrCodeFileName);
+    
+        // Trả về view và truyền biến $qrCodePath vào view
+        return view('booking.datvethanhcong', ['qrCodePath' => $qrCodePath]);
+    }
+    
+    
 
-        return redirect()->route('booking.datvethanhcong');
-    }
-    public function getDatVeThanhCong()
-    {   
-        return view('booking.datvethanhcong');
-    }
 }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('tenghe');
             $table->integer('soluong');
             $table->double('giave');
+            $table->string('qrcode');
             $table->timestamps();
             $table->engine = 'InnoDB';
         }); 

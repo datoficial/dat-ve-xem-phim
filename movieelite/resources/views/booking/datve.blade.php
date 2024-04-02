@@ -42,7 +42,8 @@
                       
                       </ul>
               </div>
-              <input id="screen-next-btn" type="button" name="next-step" class="next-step" value="Continue Booking" disabled />
+              <input id="screen-next-btn" type="button" name="next-step" class="next-step" value="Tiếp tục đặt vé" disabled />
+              <input type="hidden" name="suatchieu_id" id="suatchieu_id">
             </fieldset>
 
             <!-- Chọn ghế ngồi -->
@@ -52,87 +53,43 @@
         <iframe id="seat-sel-iframe"
             style="box-shadow: 0 14px 12px 0 var(--theme-border), 0 10px 50px 0 var(--theme-border); width: 800px; height: 550px; display: block; margin-left: auto; margin-right: auto;"
             src="{{ route('booking.chonghe') }}"></iframe>
-
             </div>
             <br>
-            <input type="button" name="next-step" class="next-step" value="Proceed to Payment" />
-            <input type="button" name="previous-step" class="previous-step" value="Back" />
+            <input type="button" name="next-step" class="next-step" value="Thanh Toán" />
+            <input type="button" name="previous-step" class="previous-step" value="Trở lại" />
             </fieldset>
             <fieldset>
           <!-- Payment Page -->
           <div id="payment_div">
             <div class="payment-row">
               <div class="col-75">
-                <div class="payment-container">
-                  <div class="payment-row">
-                    <div class="col-50">
-                      <h3 id="payment-h3">Payment</h3>
-                      <div class="payment-row payment">
-                        <div class="col-50 payment">
-                          <label for="card" class="method card">
-                            <div class="icon-container">
-                              <i class="fa fa-cc-visa" style="color: navy"></i>
-                              <i class="fa fa-cc-amex" style="color: blue"></i>
-                              <i class="fa fa-cc-mastercard" style="color: red"></i>
-                              <i class="fa fa-cc-discover" style="color: orange"></i>
-                            </div>
-                            <div class="radio-input">
-                              <input type="radio" id="card" />
-                              Pay RS.200.00 with credit card
-                            </div>
-                          </label>
-                        </div>
-                        <div class="col-50 payment">
-                          <label for="paypal" class="method paypal">
-                            <div class="icon-container">
-                              <i class="fa fa-paypal" style="color: navy"></i>
-                            </div>
-                            <div class="radio-input">
-                              <input id="paypal" type="radio" checked>
-                              Pay $30.00 with PayPal
-                            </div>
-                          </label>
-                        </div>
-                      </div>
-
+                  <div class="payment-container">
                       <div class="payment-row">
-                        <div class="col-50">
-                          <label for="cname">Cardholder's Name</label>
-                          <input type="text" id="cname" name="cardname" placeholder="Firstname Lastname"  />
-                        </div>
-                        <div class="col-50">
-                          <label for="ccnum">Credit card number</label>
-                          <input type="text" id="ccnum" name="cardnumber" placeholder="xxxx-xxxx-xxxx-xxxx"
-                            />
-                        </div>
-                      </div>
-                      <div class="payment-row">
-                        <div class="col-50">
-                          <label for="expmonth">Exp Month</label>
-                          <input type="text" id="expmonth" name="expmonth" placeholder="September"  />
-                        </div>
-                        <div class="col-50">
-                          <div class="payment-row">
-                            <div class="col-50">
-                              <label for="expyear">Exp Year</label>
-                              <input type="text" id="expyear" name="expyear" placeholder="yyyy"  />
-                            </div>
-                            <div class="col-50">
-                              <label for="cvv">CVV</label>
-                              <input type="text" id="cvv" name="cvv" placeholder="xxx"  />
+                          <div class="col-50">
+                              <h3 id="payment-h3">Thanh Toán</h3>
+                              <div class="payment-row">
+                                <div class="col-50">
+                                    <label for="total1">Total Amount:</label>
+                                    <input type="text" id="total1" name="total1" placeholder="Nhập tài khoản thanh toán" required />
+                                </div>
+                                <div class="col-50">
+                                    <label for="payment-method">Thanh toán qua:</label>
+                                    <select id="payment-method" name="payment-method" required>
+                                        <option value="credit-card">Credit Card</option>
+                                        <option value="paypal">PayPal</option>
+                                        <option value="cash">Cash</option>
+                                    </select>
+                                </div>
                             </div>
                           </div>
-                        </div>
                       </div>
-                    </div>
                   </div>
-                </div>
               </div>
             </div>
           </div>
-          <input type="button" name="next-step" class="next-step pay-btn" value="Confirm Payment" />
-              <input type="button" name="previous-step" class="cancel-pay-btn" value="Cancel Payment"
-                onclick="location.href='"(route('fontend.home')"';" />
+              <input type="button" name="next-step" class="next-step pay-btn" value="Xác nhận thanh toán" />
+              <input type="button" name="previous-step" class="cancel-pay-btn" value="Hủy thanh toán"
+                  onclick="location.href='{{ route('frontend.home') }}';" />
           </fieldset>
           <fieldset>
           <h2>E-Ticket</h2>
@@ -140,193 +97,49 @@
             <div class="ticket">
               <div class="holes-top"></div>
               <div class="title">
-                <p class="cinema">MyShowz Entertainment</p>
-                <p class="movie-title">Movie Name</p>
+                <p class="cinema">Movie Elite</p>
+                <p class="movie-title">{{$phim->tenphim}}</p>
               </div>
               <div class="poster">
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/25240/only-god-forgives.jpg"
-                  alt="Movie: Only God Forgives" />
+                <img src="{{ env('APP_URL') . '/storage/app/' . $phim->hinhanh }}" alt=""/>
               </div>
               <div class="info">
                 <table class="info-table ticket-table">
                   <tr>
-                    <th>SCREEN</th>
-                    <th>ROW</th>
-                    <th>SEAT</th>
+                    <th>Ngày chiếu</th>
+                    <th>Giờ chiếu</th>
+                    <th>Chỗ ngồi</th>
                   </tr>
                   <tr>
-                    <td class="bigger">18</td>
-                    <td class="bigger">H</td>
-                    <td class="bigger">24</td>
+                  <td class="bigger" name="ngaychieu_submit" id="ngaychieu_submit"></td>
+                    <td class="bigger" name="giobatdau_submit" id="giobatdau_submit"></td>
+                    <td class="bigger" name="tenghe1" id="tenghe1"></td>
                   </tr>
                 </table>
                 <table class="info-table ticket-table">
                   <tr>
-                    <th>PRICE</th>
-                    <th>DATE</th>
-                    <th>TIME</th>
+                    <th>Phòng</th>
+                    <th>Số lượng vé</th>
+                    <th>Tổng tiền</th>
                   </tr>
                   <tr>
-                    <td>RS.12.00</td>
-                    <td>4/13/21</td>
-                    <td>19:30</td>
+                    <td name="phongchieu_submit" id="phongchieu_submit"></td>
+                    <td name="soluong1" id="soluong1"></td>
+                    <td name="giave1" id="giave1"></td>
                   </tr>
                 </table>
               </div>
+              <!-- mã QR -->
               <div class="holes-lower"></div>
-              <div class="serial">
-                <table class="barcode ticket-table">
-                  <tr>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                    <td style="background-color:black;"></td>
-                    <td style="background-color:white;"></td>
-                  </tr>
-                </table>
-                <table class="numbers ticket-table">
-                  <tr>
-                    <td>9</td>
-                    <td>1</td>
-                    <td>7</td>
-                    <td>3</td>
-                    <td>7</td>
-                    <td>5</td>
-                    <td>4</td>
-                    <td>4</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>4</td>
-                    <td>1</td>
-                    <td>4</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>7</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>1</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>2</td>
-                  </tr>
-                </table>
-              </div>
+              <br>
+              <br>
+              <br>
+              <div class="barcode" id="barcode"></div>
+
             </div>
           </div>
-          <input type="submit" name="previous-step" class="home-page-btn" value="Browse to Home Page"/>
+          <input type="submit" name="previous-step" class="home-page-btn" value="Hoàn tất đặt hàng"/>
             </fieldset>
-            <input type="hidden" name="suatchieu_id" id="suatchieu_id">
             <input type="hidden" name="user_id" value="{{ Auth::id() }}">
             <!-- Các trường input cho thông tin ghế -->
             <input type="hidden" name="giobatdau_submit" id="giobatdau_submit">
@@ -355,6 +168,55 @@
 
   <link rel="stylesheet" type="text/css" href="{{ asset('public/assets/css/payment.css')}}" />
   <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,700" rel="stylesheet">
+  <style>
+        /* Định dạng select box */
+    select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+        appearance: none; 
+        background-image: url('data:image/svg+xml;utf8,<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>'); /* Thêm mũi tên dropdown tùy chỉnh */
+        background-repeat: no-repeat;
+        background-position: right 5px center;
+        background-size: 20px;
+    }
+
+    /* Tùy chỉnh giao diện khi hover */
+    select:hover {
+        border-color: #999;
+    }
+
+    /* Tùy chỉnh giao diện khi focus */
+    select:focus {
+        border-color: #333;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+
+      </style>
+      <style>
+          .barcode {
+            display: inline-block;
+            height: 50px; /* Chiều cao của mã vạch */
+            width:  80%;
+            overflow-x: auto;
+            white-space: nowrap;
+            font-size: 0;
+          }
+          .barcode-cell {
+            display: inline-block;
+            width: 5px; /* Độ rộng của mỗi ô */
+            height: 100%;
+          }
+          .black {
+            background-color: black;
+          }
+          .white {
+            background-color: white;
+          }
+        </style>
 @endsection
 
 @section('javascript')
@@ -385,7 +247,37 @@
 }
 
 </script>
-
+<script>
+  // Function to generate a random barcode
+  function generateBarcode() {
+    var barcodeContainer = document.getElementById("barcode");
+    barcodeContainer.innerHTML = ""; // Clear previous barcode
+    
+    var barcodeNumbers = []; // Array to store random numbers for barcode
+    var barcodeLength = 60; // Số lượng ô trong mã vạch
+    
+    // Generate random numbers for the barcode
+    for (var i = 0; i < barcodeLength; i++) {
+      var randomNumber = Math.round(Math.random());
+      barcodeNumbers.push(randomNumber);
+    }
+    
+    // Create barcode cells based on the random numbers
+    for (var i = 0; i < barcodeNumbers.length; i++) {
+      var cell = document.createElement("div");
+      cell.classList.add("barcode-cell");
+      if (barcodeNumbers[i] === 1) {
+        cell.classList.add("black");
+      } else {
+        cell.classList.add("white");
+      }
+      barcodeContainer.appendChild(cell);
+    }
+  }
+ 
+  // Generate barcode when the page loads
+  generateBarcode();
+</script>
 <script src="https://npmcdn.com/flickity@2/dist/flickity.pkgd.js"></script>
 <script type="text/javascript" src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'>
 </script>
@@ -393,6 +285,12 @@
 <script src="{{ asset('public/assets/js/theme-change.js')}}"></script>
 
 <script type="text/javascript" src="{{ asset('public/assets/js/ticket-booking.js')}}"></script>
+<script>
+      function selectTime(suatchieu_id) {
+        sessionStorage.setItem('suatchieu_id', suatchieu_id);
+    }
+  </script>
+
 <script>
 function selectDate(ngaychieu) {
     var giobatdauFormatted;
@@ -422,7 +320,7 @@ function selectDate(ngaychieu) {
             <div class="screens">
                 ${giochieu.phongchieu.tenphong}
             </div>
-                <button class="screen-time" onclick="timeFunction()">
+                <button class="screen-time" onclick="timeFunction(); selectTime(${giochieu.id})">
                     ${giobatdauFormatted}
                 </button>
             </div>`;
@@ -430,6 +328,10 @@ function selectDate(ngaychieu) {
         document.getElementById('giobatdau_submit').value = giobatdau;
         document.getElementById('ngaychieu_submit').value = ngaychieu;
         document.getElementById('suatchieu_id').value = giochieu.id;
+        document.getElementById('giobatdau_submit').innerText = giobatdauFormatted;
+        document.getElementById('ngaychieu_submit').innerText = ngaychieu;
+        document.getElementById('phongchieu_submit').innerText = giochieu.phongchieu.tenphong;
+    
     });
 }
 </script>
@@ -440,7 +342,7 @@ function selectDate(ngaychieu) {
 
             selectDate(firstNgaychieu);
         });
-    </script>
+</script>
 <script>
     window.addEventListener('message', function(event) {
         var data = event.data;
@@ -452,39 +354,13 @@ function selectDate(ngaychieu) {
         document.getElementById('tenghe').value = tenghe;
         document.getElementById('soluong').value = soluong;
         document.getElementById('giave').value = giave;
+
+
+
+        document.getElementById('tenghe1').innerText = tenghe;
+        document.getElementById('soluong1').innerText = soluong;
+        document.getElementById('giave1').innerText = giave;
     });
-</script>
-<script>
-    // Lấy phần tử cha của bước thanh toán hiện tại
-    var paymentDiv = document.getElementById('payment_div');
-    // Thay thế nội dung của phần tử cha bằng nội dung mới
-    paymentDiv.innerHTML = `
-        <div class="payment-row">
-            <div class="col-75">
-                <div class="payment-container">
-                    <div class="payment-row">
-                        <div class="col-50">
-                            <h3 id="payment-h3">Thanh Toán</h3>
-                            <div class="payment-row">
-                              <div class="col-50">
-                                  <label for="total1">Total Amount:</label>
-                                  <input type="text" id="total1" name="total1" placeholder="Nhập tài khoản thanh toán" required />
-                              </div>
-                              <div class="col-50">
-                                  <label for="payment-method">Thanh toán qua:</label>
-                                  <select id="payment-method" name="payment-method" required>
-                                      <option value="credit-card">Credit Card</option>
-                                      <option value="paypal">PayPal</option>
-                                      <option value="cash">Cash</option>
-                                  </select>
-                              </div>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
 </script>
 
 @endsection

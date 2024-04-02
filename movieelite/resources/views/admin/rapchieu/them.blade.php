@@ -15,7 +15,7 @@
 
             <div class="mb-3">
                 <label class="form-label" for="diachi">Địa chỉ</label>
-                <input type="number" class="form-control @error('diachi') is-invalid @enderror" id="diachi" name="diachi" value="{{ old('diachi') }}" required>
+                <input type="text" class="form-control @error('diachi') is-invalid @enderror" id="diachi" name="diachi" value="{{ old('diachi') }}" required>
                 @error('diachi')
                     <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
                 @enderror

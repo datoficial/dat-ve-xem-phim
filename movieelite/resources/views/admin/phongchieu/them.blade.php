@@ -10,7 +10,7 @@
                 <select class="form-select @error('rapchieu_id') is-invalid @enderror" id="rapchieu_id" name="rapchieu_id" required>
                     <option value="">Chọn rạp chiếu</option>
                     @foreach($rapchieu as $rc)
-                        <option value="{{ $rc->id }}" @if(old('rapchieu_id') == $rc->id) selected @endif>{{ $rc->tenloai }}</option>
+                        <option value="{{ $rc->id }}" @if(old('rapchieu_id') == $rc->id) selected @endif>{{ $rc->tenrap }}</option>
                     @endforeach
                 </select>
                 @error('rapchieu_id')

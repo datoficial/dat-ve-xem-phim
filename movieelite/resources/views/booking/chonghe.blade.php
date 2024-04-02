@@ -17,15 +17,17 @@
     <div class="main">
         <div class="demo">
             <div id="seat-map">
-                <div class="front">Màn hình</div>                    
+                <div class="front">Màn hình</div>      
             </div>
             <div class="booking-details">
                 <ul class="book-left">
+                    <li>Suất chiếu</li>
                     <li>Số lượng vé</li>
                     <li>Tổng</li>
                     <li>Ghế đã chọn</li>
                 </ul>
                 <ul class="book-right">
+                    <li>: <span id="received-suatchieuId">{{ old('suatchieu_id') }}</span></li>
                     <li>: <span id="counter">0</span></li>
                     <li>: <b><span id="total">0</span> <i>VNĐ</i></b></li>
                 </ul>
@@ -34,7 +36,11 @@
                 <div id="legend"></div>
             </div>
 
-            <script>
+    <script>
+        var suatchieuId = sessionStorage.getItem('suatchieu_id');
+        // Hiển thị suatchieu_id trong div có id là 'received-suatchieuId'
+        document.getElementById('received-suatchieuId').textContent = suatchieuId;
+
                 var price = 85000; 
                 $(document).ready(function () {
                     var $cart = $('#selected-seats'), //Sitting Area
@@ -70,7 +76,7 @@
                         },
                         click: function () { //Click event
                             if (this.status() == 'available') {
-                                $('<li> R-' + (this.settings.row + 1) + '_'+'C-' + this.settings.label +','+'</li>')
+                                $('<li>' + (this.settings.row + 1) + '_'+ this.settings.label +','+'</li>')
                                     .attr('id', 'cart-item-' + this.settings.id)
                                     .data('seatId', this.settings.id)
                                     .appendTo($cart);
@@ -84,11 +90,8 @@
                             } else if (this.status() == 'selected') { 
                                 $counter.text(sc.find('selected').length - 1);
                                 $total.text(recalculateTotal(sc) - price);
-
                                 $('#cart-item-' + this.settings.id).remove();
-
                                 sendDataToParent($cart, $counter, $total);
-
                                 return 'available';
                             } else if (this.status() == 'unavailable') { //sold
                                 return 'unavailable';
@@ -100,7 +103,6 @@
                     //sold seat
                     sc.get(['1_2', '4_4', '4_5', '6_6', '6_7', '8_5', '8_6', '8_7', '8_8', '10_1', '10_2']).status(
                         'unavailable');
-
                 });
 
                 function recalculateTotal(sc) {
@@ -121,6 +123,7 @@
                     window.parent.postMessage(data, '*');
                 }
             </script>
+
         </div>
     </div>
     <script src="{{ asset('public/seat_selection/js/jquery.nicescroll.js') }}"></script>
