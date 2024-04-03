@@ -49,8 +49,7 @@
             <!-- Chọn ghế ngồi -->
             <fieldset>
             <div>
-
-        <iframe id="seat-sel-iframe"
+            <iframe id="seat-sel-iframe"
             style="box-shadow: 0 14px 12px 0 var(--theme-border), 0 10px 50px 0 var(--theme-border); width: 800px; height: 550px; display: block; margin-left: auto; margin-right: auto;"
             src="{{ route('booking.chonghe') }}"></iframe>
             </div>
@@ -69,7 +68,7 @@
                               <h3 id="payment-h3">Thanh Toán</h3>
                               <div class="payment-row">
                                 <div class="col-50">
-                                    <label for="total1">Total Amount:</label>
+                                    <label for="total1">Số thẻ</label>
                                     <input type="text" id="total1" name="total1" placeholder="Nhập tài khoản thanh toán" required />
                                 </div>
                                 <div class="col-50">
@@ -79,6 +78,14 @@
                                         <option value="paypal">PayPal</option>
                                         <option value="cash">Cash</option>
                                     </select>
+                                </div>
+                                <div class="col-50">
+                                    <label for="date1">Ngày hết hạn:</label>
+                                    <input type="text" id="date1" name="date1" placeholder="xx/xx" required />
+                                </div>
+                                <div class="col-50">
+                                    <label for="date1">Mã cgv:</label>
+                                    <input type="text" id="date1" name="date1" placeholder="xxx" required />
                                 </div>
                             </div>
                           </div>

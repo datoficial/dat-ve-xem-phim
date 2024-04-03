@@ -52,9 +52,7 @@ Route::name('frontend.')->group(function() {
         Route::get('/', [KhachHangController::class, 'getHome'])->name('home');
         Route::get('/home', [KhachHangController::class, 'getHome'])->name('home');
         // Xem và cập nhật trạng thái đơn hàng
-        Route::get('/ve-cua-toi', [KhachHangController::class, 'getDonVe'])->name('xemve');
-        Route::get('/ve-cua-toi/{id}', [KhachHangController::class, 'getDonVe'])->name('xemve.chitiet');
-        Route::post('/ve-cua-toi/{id}', [KhachHangController::class, 'postDonVe'])->name('xemve.chitiet');
+        Route::get('/ve-cua-toi/{id}', [KhachHangController::class, 'getVe'])->name('ve');
         // Cập nhật thông tin tài khoản
         Route::get('/ho-so-ca-nhan', [KhachHangController::class, 'getHoSoCaNhan'])->name('hosocanhan');
         Route::post('/ho-so-ca-nhan', [KhachHangController::class, 'postHoSoCaNhan'])->name('hosocanhan');

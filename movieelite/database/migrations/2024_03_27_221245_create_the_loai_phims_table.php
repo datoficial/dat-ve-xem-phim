@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('theloaiphim', function (Blueprint $table) {
             $table->id();
+            
             $table->string('tenloai');
             $table->string('tenloai_slug');
             $table->timestamps();

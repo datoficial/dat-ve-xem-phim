@@ -34,8 +34,6 @@ class DatVeController extends Controller
         return view("booking.chonghe");
     }
 
-
-
     public function postDatVe(Request $request)
     {
         // Tạo một đối tượng vé mới
@@ -51,35 +49,33 @@ class DatVeController extends Controller
         if ($ve->save()) {
             // Tạo mã vạch cho vé
             $barcode = new DNS1D();
-            $barcode->setStorPath(public_path('qrcodes')); // Đặt đường dẫn lưu trữ mã vạch
-    
             $barcodeData = strval($ve->id); // Chuyển đổi số nguyên thành chuỗi
             $barcodeFilename = $ve->id . '.png'; // Giữ nguyên số nguyên
             
+            // Lưu mã vạch vào thư mục qrcodes
+            $barcode->setStorPath(public_path('qrcodes')); // Đường dẫn lưu mã vạch
+    
             $barcode->getBarcodePNGPath($barcodeData, 'C128', 3, 33, array(1,1,1), true); // Tạo mã vạch và lưu vào tệp PNG
     
-            $ve->qrcode = $barcodeFilename; // Lưu đường dẫn tới tệp mã vạch vào cơ sở dữ liệu
+            $ve->qrcode = 'qrcodes/' . $barcodeFilename; // Lưu đường dẫn tới tệp mã vạch vào cơ sở dữ liệu
     
-            // Lưu vé vào cơ sở dữ liệu
             $ve->save();
+    
+            // Lưu đường dẫn của ảnh mã vạch vào session
+            // Lưu đường dẫn của ảnh mã vạch vào session
+            session(['qrCodeFileName' => 'qrcodes' . $barcodeFilename]);
+    
+            // Redirect đến trang "datvethanhcong"
+            return redirect()->route('booking.datvethanhcong');
         } else {
             // Xử lý lỗi khi không thể lưu vé vào cơ sở dữ liệu
-             return response()->json(['error' => 'Không thể lưu vé vào cơ sở dữ liệu'], 500);
+            return response()->json(['error' => 'Không thể lưu vé vào cơ sở dữ liệu'], 500);
         }
-    
-        // Chuyển hướng đến hàm getDatVeThanhCong và truyền đường dẫn tới ảnh QR code
-        return $this->getDatVeThanhCong($ve->qrcode);
     }
-    
-    public function getDatVeThanhCong($qrCodeFileName)
+    public function getDatVeThanhCong()
     {
-        // Xây dựng đường dẫn đến ảnh QR code trong thư mục public/qrcodes
-        $qrCodePath = asset('qrcodes\\' . $qrCodeFileName);
-    
-        // Trả về view và truyền biến $qrCodePath vào view
-        return view('booking.datvethanhcong', ['qrCodePath' => $qrCodePath]);
+
+        return view('booking.datvethanhcong');
     }
-    
-    
 
 }

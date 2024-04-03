@@ -12,7 +12,7 @@
 		
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 		@yield('style')
-		
+		<link rel="stylesheet" href="{{ asset('public/theme.min.css') }}" />
 </head>
 
 <body class="handheld-toolbar-enabled">
@@ -41,10 +41,10 @@
 							<a class="nav-link" href="{{ route('frontend.home') }}">Trang chủ</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="movies.html">Rạp chiếu</a>
+							<a class="nav-link" href="movies.html">Thể loại phim</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="movies.html">Thể loại phim</a>
+							<a class="nav-link" href="movies.html">Tin phim</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="about.html">Giới thiệu</a>
@@ -93,8 +93,7 @@
 						style="font-size: 2rem ; display: inline-block; position: relative;">
 						<!-- <li class="nav-item"> -->
 						<p>Xin chào {{ Auth::user()->name }}</p> 
-						<a class="nav-link" href="{{ route('logout') }}"><i class="bi bi-box-arrow-right"></i></a>
-						<!-- </li> -->
+						<a class="nav-link" href="{{route('user.hosocanhan')}}"><i class="fa fa-user-circle-o"></i></a>
 					</div>
 					@endguest
 				</div>

@@ -9,11 +9,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 class SuatChieuController extends Controller
 {
+
     public function getDanhSach()
-    {
-        $suatchieu = SuatChieu::paginate(25);
-        return view('admin.suatchieu.danhsach', compact('suatchieu'));
-    }
+{
+    $suatchieu = SuatChieu::with('PhongChieu')->orderBy('phongchieu_id')->paginate(25);
+    return view('admin.suatchieu.danhsach', compact('suatchieu'));
+}
+
     public function getThem()
     {
         $phongchieu = PhongChieu::all();

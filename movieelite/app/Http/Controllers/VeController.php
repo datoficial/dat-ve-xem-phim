@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ve;
+use App\Models\User;
+use App\Models\SuatChieu;
+use App\Models\PhongChieu;
+use App\Models\Phim;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -11,34 +16,15 @@ class VeController extends Controller
     public function getDanhSach()
     {
         $ve = Ve::paginate(25);
-        return view('admin.ve.danhsach', compact('ve'));
-    }
-        public function getVe()
-        {
-            $users = User::all(); // Đổi tên biến để mô tả hơn
+        
+            $users = User::all(); 
             $suatchieu = SuatChieu::all();
-            return view('admin.ve.them', compact('users', 'suatchieu')); // Đổi tên biến ở đây
-        }
-
-    public function postVe(Request $request)
-    {
-        // Lấy user_id của người dùng đã xác thực
-        $user_id = auth()->id();
-    
-        // Validate dữ liệu yêu cầu để đảm bảo 'user_id' và 'suatchieu_id' tồn tại
-        $request->validate([
-            'suatchieu_id' => 'required',
-        ]);
-    
-        $orm = new Ve();
-        $orm->user_id = $user_id; // Sử dụng user_id đã lấy
-        $orm->suatchieu_id = $request->suatchieu_id;
-        $orm->save();
-    
-        return redirect()->route('admin.ve');
+            $phongchieu = PhongChieu::all();
+            $phim = Phim::all();
+        return view('admin.ve.danhsach',compact('ve','users', 'suatchieu','phim','phongchieu'));
     }
-    
-    
+
+
     public function getSua($id)
     {
         $ve = Ve::find($id);

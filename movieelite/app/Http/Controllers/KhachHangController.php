@@ -4,6 +4,7 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\Ve;
 use App\Models\ChiTietVe;
+use App\Models\Phim;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,12 +22,17 @@ class KhachHangController extends Controller
         else
         return redirect()->route('user.dangnhap');
     }
-    public function getDonHang($id = '')
+
+    public function getVe($id)
     {
-    // Bổ sung code tại đây
-        return view('user.donhang');
+            $user = User::findOrFail($id);
+            $ve = $user->ve;
+            $qrCodeFileName = session('qrCodeFileName');
+            return view('user.ve', compact('ve', 'qrCodeFileName'));
+        
     }
-    public function postDonHang(Request $request, $id)
+    
+    public function postVe(Request $request, $id)
     {
     // Bổ sung code tại đây
     }
