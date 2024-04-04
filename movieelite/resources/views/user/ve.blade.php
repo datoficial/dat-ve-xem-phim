@@ -11,29 +11,29 @@
         <div class="poster">
         <img src="{{ env('APP_URL') . '/storage/app/' . $value->SuatChieu->Phim->hinhanh }}" alt=""/>
         </div>
-        <div class="info">
+        <div class="info" >
             <table>
                 <tr>
-                    <th>SCREEN</th>
-                    <th>ROW</th>
-                    <th>SEAT</th>
+                    <th>Ngày chiếu</th>
+                    <th>Giờ chiếu</th>
+                    <th>Chỗ ngồi</th>
                 </tr>
                 <tr>
-                    <td class="bigger">18</td>
-                    <td class="bigger">H</td>
-                    <td class="bigger">24</td>
+                    <td>{{$value->SuatChieu->ngaychieu}}</td>
+                    <td>{{$value->SuatChieu->giobatdau}}</td>
+                    <td>{{$value->tenghe}}</td>
                 </tr>
             </table>
             <table>
                 <tr>
-                    <th>PRICE</th>
-                    <th>DATE</th>
-                    <th>TIME</th>
+                    <th>Phòng</th>
+                    <th>Số lượng vé</th>
+                    <th>Tổng tiền</th>
                 </tr>
                 <tr>
-                    <td>Rs. 12.00</td>
-                    <td>4/13/21</td>
-                    <td>19:30</td>
+                    <td>{{$value->SuatChieu->PhongChieu->tenphong}}</td>
+                    <td>{{$value->soluong}}</td>
+                    <td>{{$value->giave}}</td>
                 </tr>
             </table>
         </div>
@@ -55,5 +55,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/assets/css/e-ticket.css')}}">
     <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,700" rel="stylesheet">
+    <style>
+        .info {
+    width: 100%; /* Đặt chiều rộng của phần tử .info */
+    margin: 0 50px 20px; /* Đặt margin top và bottom là 0, left và right là auto để căn giữa phần tử */
+}
+.info table {
+    margin-bottom: 20px; /* Khoảng cách dưới cùng giữa các bảng */
+}
+.info td,
+.info th {
+    padding-left: 10px; /* Khoảng cách dưới cùng giữa các hàng */
+}
+
+        </style>
 
 @endsection

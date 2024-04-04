@@ -21,7 +21,8 @@ class DatVeController extends Controller
             // Selecting specific columns using the select method
             $phim = Phim::select('id', 'tenphim', 'hinhanh')->find($phim_id);
             
-            $suatchieu = SuatChieu::with('phongchieu')->where('phim_id', $phim_id)->get();
+            $suatchieu = SuatChieu::with('phongchieu.rapchieu')->where('phim_id', $phim_id)->get();
+
         
             return view('booking.datve', compact('suatchieu', 'phim'));
         } else {

@@ -9,8 +9,8 @@
                 <div class="card-body text-center">
                     <h2 class="h4 pb-3">Cảm ơn bạn đã đặt vé!</h2>
                     <p class="fs-sm mb-2">Vé của bạn đã được đặt.</p>
-                    <!-- Hiển thị ảnh mã QR code -->
-                    <a class="btn btn-danger mt-3 me-3" href="{{ route('frontend.home') }}"><i class="ci-cart me-2"></i>Tiếp tục đặt vé</a>
+                    <p class="fs-sm mb-2">Bạn có thể truy cập vào trang cá nhân để xem thông tin vé!</p>
+                    <a class="btn btn-danger mt-3 me-3" href="{{ route('frontend.home') }}">Tiếp tục đặt vé</a>
                 </div>
             </div>
         </div>

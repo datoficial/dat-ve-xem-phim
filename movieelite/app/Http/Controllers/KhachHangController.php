@@ -23,14 +23,17 @@ class KhachHangController extends Controller
         return redirect()->route('user.dangnhap');
     }
 
+
     public function getVe($id)
     {
-            $user = User::findOrFail($id);
+        $user = User::findOrFail($id);
+        
             $ve = $user->ve;
             $qrCodeFileName = session('qrCodeFileName');
-            return view('user.ve', compact('ve', 'qrCodeFileName'));
-        
+            return view('user.ve', compact('ve'));
     }
+    
+    
     
     public function postVe(Request $request, $id)
     {

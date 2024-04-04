@@ -141,7 +141,11 @@
               <br>
               <br>
               <br>
-              <div class="barcode" id="barcode"></div>
+              <div class="alert alert-info" role="alert">
+                <p>Vui lòng kiểm tra thông tin vé trước khi nhấn Hoàn tất</p>
+                <p>Vé sẽ được lưu ở trang cá nhân của bạn</p>
+            </div>
+
 
             </div>
           </div>
@@ -325,8 +329,9 @@ function selectDate(ngaychieu) {
         li.innerHTML = `
             <div class="time-btn">
             <div class="screens">
-                ${giochieu.phongchieu.tenphong}
-            </div>
+    ${giochieu.phongchieu.tenphong} của rạp ${giochieu.phongchieu.rapchieu.tenrap}
+</div>
+
                 <button class="screen-time" onclick="timeFunction(); selectTime(${giochieu.id})">
                     ${giobatdauFormatted}
                 </button>

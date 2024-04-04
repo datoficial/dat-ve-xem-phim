@@ -21,13 +21,11 @@
             </div>
             <div class="booking-details">
                 <ul class="book-left">
-                    <li>Suất chiếu</li>
                     <li>Số lượng vé</li>
                     <li>Tổng</li>
                     <li>Ghế đã chọn</li>
                 </ul>
                 <ul class="book-right">
-                    <li>: <span id="received-suatchieuId">{{ old('suatchieu_id') }}</span></li>
                     <li>: <span id="counter">0</span></li>
                     <li>: <b><span id="total">0</span> <i>VNĐ</i></b></li>
                 </ul>
@@ -35,11 +33,7 @@
                 <ul id="selected-seats" class="scrollbar scrollbar1"></ul>
                 <div id="legend"></div>
             </div>
-
     <script>
-        var suatchieuId = sessionStorage.getItem('suatchieu_id');
-        // Hiển thị suatchieu_id trong div có id là 'received-suatchieuId'
-        document.getElementById('received-suatchieuId').textContent = suatchieuId;
 
                 var price = 85000; 
                 $(document).ready(function () {
