@@ -51,7 +51,7 @@
 							<h3 class="hny-title">{{ $value->tenloai }}</h3>
 						</div>
 						<div class="headerhny-right text-lg-right">
-							<h4><a class="show-title" href="{{ route('booking.datve', ['phim_id' => $p->id]) }}">Xem tất cả</a></h4>
+							<h4><a class="show-title" href="{{ route('frontend.capnhat') }}">Xem tất cả</a></h4>
 						</div>
 					</div>
 				</div>

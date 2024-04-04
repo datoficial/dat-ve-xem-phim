@@ -21,6 +21,8 @@ Route::name('frontend.')->group(function() {
         // Trang chủ
         Route::get('/', [HomeController::class, 'getHome'])->name('home');
         Route::get('/home', [HomeController::class, 'getHome'])->name('home');
+        Route::get('/capnhat', [HomeController::class, 'getCapNhat'])->name('capnhat');
+        Route::get('/lienhe', [HomeController::class, 'getLienHe'])->name('lienhe');
         // Trang sản phẩm
         Route::get('/phim', [HomeController::class, 'getPhim'])->name('phim');
         Route::get('/phim{tenloai_slug}', [HomeController::class, 'getPhim'])->name('phim.phanloai');

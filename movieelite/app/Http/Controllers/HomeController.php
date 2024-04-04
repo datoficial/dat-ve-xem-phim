@@ -25,7 +25,12 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-
+    public function getCapNhat()
+    {
+    
+        return view('frontend.capnhat');
+       
+    }
     public function getHome()
     {
     $theloaiphim = TheLoaiPhim::all();
@@ -106,10 +111,7 @@ class HomeController extends Controller
         else
             return view('frontend.giohangrong');
     }
-    public function getTuyenDung()
-    {
-        return view('frontend.tuyendung');
-    }
+
     public function getLienHe()
     {
         return view('frontend.lienhe');

@@ -40,17 +40,23 @@
 						<li class="nav-item active">
 							<a class="nav-link" href="{{ route('frontend.home') }}">Trang chủ</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="movies.html">Thể loại phim</a>
+						<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown" data-bs-auto-close="outside">Thể loại phim</a>
+									<ul class="dropdown-menu">
+										<li><a class="dropdown-item" href="{{ route('frontend.capnhat') }}">Phim hot</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.capnhat') }}">Tình cảm</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.capnhat') }}">Hoạt hình</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.capnhat') }}">Hành động</a></li>
+									</ul>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="movies.html">Tin phim</a>
+							<a class="nav-link" href="{{ route('frontend.capnhat') }}">Tin phim</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="about.html">Giới thiệu</a>
+							<a class="nav-link" href="{{ route('frontend.lienhe') }}">Liên hệ</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="Contact_Us.html">Liên hệ</a>
+							<a class="nav-link" href="{{ route('frontend.capnhat') }}">Giới thiệu</a>
 						</li>
 					</ul>
 					<!--/search-right-->
@@ -70,7 +76,7 @@
 								<div class="browse-items">
 									<h3 class="hny-title two mt-md-5 mt-4">Tìm theo loại:</h3>
 									<ul class="search-items">
-										<li><a href="movies.html">Hành động</a></li>
+										<li><a href="{{ route('frontend.capnhat') }}">Hành động</a></li>
 									</ul>
 								</div>
 							</div>
@@ -92,8 +98,7 @@
 					<div class="Login_SignUp" id="login"
 						style="font-size: 2rem ; display: inline-block; position: relative;">
 						<!-- <li class="nav-item"> -->
-						<p>Xin chào {{ Auth::user()->name }}</p> 
-						<a class="nav-link" href="{{route('user.hosocanhan')}}"><i class="fa fa-user-circle-o"></i></a>
+						<a class="nav-link" href="{{route('user.hosocanhan')}}"><p>Xin chào {{ Auth::user()->name }}</p> </a>
 					</div>
 					@endguest
 				</div>
