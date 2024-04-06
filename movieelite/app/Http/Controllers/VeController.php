@@ -30,7 +30,7 @@ class VeController extends Controller
         $ve = Ve::find($id);
         $user = User::all();
         $suatchieu = SuatChieu::all();
-        return view('admin.ve.sua', compact('ve', 'nguoidung','suatchieu'));
+        return view('admin.ve.sua', compact('ve', 'user','suatchieu'));
     }
     public function postSua(Request $request, $id)
     {

@@ -3,9 +3,9 @@
     <div class="card">
         <div class="card-header">Sửa suất chiếu</div>
         <div class="card-body">
-        <form action="{{ route('admin.suatchieu.sua', ['id' => $suatchieu->id]) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('admin.suatchieu.sua', ['id' => $ve->id]) }}" method="post" enctype="multipart/form-data">
     @csrf
-    <div class="mb-3">
+    <div class="mb-3">``
         <label class="form-label" for="phongchieu_id">Phòng chiếu</label>
         <select class="form-select @error('phongchieu_id') is-invalid @enderror" id="phongchieu_id" name="phongchieu_id" required>
             <option value="">-- Chọn phòng --</option>
