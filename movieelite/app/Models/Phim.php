@@ -17,4 +17,8 @@ class Phim extends Model
     {
         return $this->hasMany(SuatChieu::class, 'phim_id', 'id');
     }
+    public function BaiViet(): HasMany
+    {
+        return $this->hasMany(BaiViet::class, 'phim_id', 'id');
+    }
 }

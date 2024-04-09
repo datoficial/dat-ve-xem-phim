@@ -9,8 +9,9 @@
                     <thead>
                         <tr>
                             <th width="5%">#</th>
-                            <th width="20%">Chủ đề</th>
+                            <th width="15%">Chủ đề</th>
                             <th width="55%">Thông tin bài viết</th>
+                            <th width="5%">Phim</th>
                             <th width="20%" colspan="4" class="text-center">Hành động</th>
                         </tr>
                     </thead>
@@ -26,6 +27,9 @@
                         <br />Người đăng: <strong>{{ $value->User->name }}</strong>
                         <br />Có <strong>{{ $value->luotxem }}</strong> lượt xem
                         </span>
+                        </td>
+                        <td>
+                            {{ $value->Phim->tenphim ?? 'Không áp dụng phim' }}
                         </td>
                         <td class="text-center" title="Trạng thái kiểm duyệt">
                         <a href="{{ route('nhanvien.baiviet.kiemduyet', ['id' => $value->id]) }}">

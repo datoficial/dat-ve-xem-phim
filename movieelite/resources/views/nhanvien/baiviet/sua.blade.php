@@ -17,6 +17,17 @@
                     @enderror
                 </div>
                 <div class="mb-3">
+                    <label class="form-label" for="phim_id">Phim</label>
+                    <select class="form-select @error('phim_id') is-invalid @enderror" id="phim_id" name="phim_id"><option value="">-- Chọn --</option>
+                        @foreach($phim as $value)
+                            <option value="{{ $value->id }}" {{ ($baiviet->phim_id == $value->id) ? 'selected' : '' }}>{{ $value->tenphim }}</option>
+                        @endforeach
+                    </select>
+                    @error('phim_id')
+                        <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
+                    @enderror
+                </div>
+                <div class="mb-3">
                     <label class="form-label" for="tieude">Tiêu đề</label>
                     <input type="text" class="form-control @error('tieude') is-invalid @enderror" id="tieude" name="tieude" value="{{ $baiviet->tieude }}" required />
                     @error('tieude')

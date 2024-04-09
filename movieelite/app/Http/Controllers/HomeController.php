@@ -57,29 +57,29 @@ class HomeController extends Controller
         $phim = Phim::where('tenphim_slug', $tenphim_slug)->first();
         return view('frontend.phim_chitiet',compact('phim'));
     }
-    public function getBaiViet($tenchude_slug = '')
+    public function getBaiViet($phim_id=null)
     {
-        if(empty($tenchude_slug))
+        if(is_null($phim_id))
         {
-        $title = 'Tin tức';
-        $baiviet = BaiViet::where('kichhoat', 1)
-        ->where('kiemduyet', 1)
-        ->orderBy('created_at', 'desc')
-        ->paginate(20);
+            $title = 'Tin tức';
+            $baiviet = BaiViet::where('kichhoat', 1)
+                ->where('kiemduyet', 1)
+                ->orderBy('created_at', 'desc')
+                ->paginate(20);
         }
         else
         {
-        $chude = ChuDe::where('tenchude_slug', $tenchude_slug)
-        ->firstOrFail();
-        $title = $chude->tenchude;
-        $baiviet = BaiViet::where('kichhoat', 1)
-        ->where('kiemduyet', 1)
-        ->where('chude_id', $chude->id)
-        ->orderBy('created_at', 'desc')
-        ->paginate(20);
+            $phim = Phim::findOrFail($phim_id);
+            $title = $phim->tenphim;
+            $baiviet = BaiViet::where('kichhoat', 1)
+                ->where('kiemduyet', 1)
+                ->where('phim_id', $phim_id)
+                ->orderBy('created_at', 'desc')
+                ->paginate(20);
         }
         return view('frontend.baiviet', compact('title', 'baiviet'));
     }
+    
     public function getBaiViet_ChiTiet($tenchude_slug = '', $tieude_slug = ''){
         $tieude_id = explode('.', $tieude_slug);
         $tieude = explode('-', $tieude_id[0]);

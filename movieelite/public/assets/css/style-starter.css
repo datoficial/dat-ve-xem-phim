@@ -19688,7 +19688,7 @@ button.closebtn {
 }
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
   gap: 20px;
 }
 
@@ -19696,7 +19696,7 @@ button.closebtn {
   border: 1px solid #ccc;
   border-radius: 10px;
   overflow: hidden;
-  width: 200px; /* Điều chỉnh kích thước khung cho phù hợp */
+  width: 100%; 
 }
 
 .product-image img {
@@ -19711,30 +19711,34 @@ button.closebtn {
 
 .product-title {
   margin: 0;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
-  color: black; /* Màu đen */
+  color: black; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
 }
 
 .showtime {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 5px;
-  color: black; /* Màu đen */
+  margin-top: 30px; 
+  color: black; 
 }
 
-
-.showtimes {
-  margin-top: 10px;
+.showtime .start-time,
+.showtime .like-icon {
+    display: flex;
+    align-items: center;
 }
 
-
-.start-time {
-  display: flex;
-  align-items: center;
+.showtime .start-time {
+    flex: 1; 
 }
 
-.like-icon {
-  color: red;
+.showtime .like-icon {
+    flex-shrink: 0; 
+    margin-left: 10px; 
 }
+

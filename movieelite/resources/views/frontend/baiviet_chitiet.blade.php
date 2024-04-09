@@ -1,18 +1,20 @@
 @extends('layouts.frontend')
 @section('title', $baiviet->tieude)
 @section('content')
-<div class="bg-secondary py-4">
+<div class="bg-secondary py-4 pt-10">
     <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
         <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb flex-lg-nowrap justify-content-center justify-content-lg-start">
-                    <li class="breadcrumb-item">
-                        <a class="text-nowrap" href="{{ route('frontend.home') }}"><i class="ci-home"></i>Trang chủ</a>
+                    <li class="breadcrumb-item" style="margin-right:10px">
+                        <a class="text-nowrap" href="{{ route('frontend.home') }}">Trang chủ</a>
                     </li>
-                    <li class="breadcrumb-item text-nowrap">
+                    <i class="bi bi-chevron-double-right"></i>
+                    <li style="margin-left:10px; margin-right:10px">
                         <a href="{{ route('frontend.baiviet') }}">Tin tức</a>
                     </li>
-                    <li class="breadcrumb-item text-nowrap active" aria-current="page">Chi tiết</li>
+                    <i class="bi bi-chevron-double-right"></i>
+                    <li style="margin-left:10px" aria-current="page">Chi tiết</li>
                 </ol>
             </nav>
             </div>
@@ -27,14 +29,14 @@
             <div class="d-flex flex-wrap justify-content-between align-items-center pb-4 mt-n1">
             <div class="d-flex align-items-center fs-sm mb-2">
             <a class="blog-entry-meta-link" href="#user">
-            <div class="blog-entry-author-ava"><img src="{{ asset('public/img/avatar1.jpg') }}" /></div>
+            <div class="blog-entry-author-ava"><img src="{{ asset('public/assets/images/avatar.jpg') }}" /></div>
             {{ $baiviet->User->name }}
             </a>
             <span class="blog-entry-meta-divider"></span>
             <a class="blog-entry-meta-link" href="#date">{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $baiviet->created_at)->format('d/m/Y') }}</a>
             </div>
             <div class="fs-sm mb-2">
-            <a class="blog-entry-meta-link text-nowrap" href="#view" data-scroll><i class="ci-eye"></i>{{ $baiviet->luotxem }}</a>
+            <a class="blog-entry-meta-link text-nowrap" href="#view" data-scroll><i class="bi bi-eye"></i>{{ $baiviet->luotxem }}</a>
             </div>
             </div>
             <p style="text-align:justify" class="fw-bold">{{ $baiviet->tomtat }}</p><p style="text-align:justify">{!! $baiviet->noidung !!}</p>
@@ -42,18 +44,12 @@
             <div class="mt-3 me-3">
             <a class="btn-tag mb-2" href="#">#{{ $baiviet->ChuDe->tenchude_slug }}</a>
             </div>
-            <div class="mt-3">
-            <span class="d-inline-block align-middle text-muted fs-sm me-3 mt-1 mb-2">Chia sẻ:</span>
-            <a class="btn-social bs-facebook me-2 mb-2" href="#facebook"><i class="ci-facebook"></i></a>
-            <a class="btn-social bs-twitter me-2 mb-2" href="#twitter"><i class="ci-twitter"></i></a>
-            <a class="btn-social bs-pinterest me-2 mb-2" href="#pinterest"><i class="ci-pinterest"></i></a>
-            </div>
             <!-- Comments-->
             <div class="pt-2 mt-5" id="comments">
             <h2 class="h4">Bình luận<span class="badge bg-secondary fs-sm text-body align-middle ms-2">{{ $baiviet->BinhLuan->count() }}</span></h2>
             @foreach($baiviet->BinhLuan as $value)
             <div class="d-flex align-items-start py-4">
-            <img class="rounded-circle" src="{{ asset('public/img/avatar-0.jpg') }}" width="50" />
+            <img class="rounded-circle" src="{{ asset('public/assets/images/avatar.jpg') }}" width="50" />
             <div class="ps-3">
             <div class="d-flex justify-content-between align-items-center mb-2">
             <h6 class="fs-md mb-0">{{ $value->User->name }}</h6>
@@ -66,8 +62,8 @@
             <div class="card border-0 shadow mt-2 mb-4">
             <div class="card-body">
             <div class="d-flex align-items-start">
-            <img class="rounded-circle" src="{{ asset('public/img/avatar1.jpg') }}" width="50" />
-        <form class="w-100 needs-validation ms-3" novalidate>
+            <img class="rounded-circle" src="{{ asset('public/assets/images/avatar.jpg') }}" width="50" />
+            <form class="w-100 needs-validation ms-3" novalidate>
             <div class="mb-3">
             <textarea class="form-control" rows="3" placeholder="Chia sẻ ý kiến của bạn..."></textarea>
             @guest

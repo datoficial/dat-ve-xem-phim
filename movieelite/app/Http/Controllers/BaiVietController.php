@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ChuDe;
 use App\Models\BaiViet;
+use App\Models\Phim;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,8 @@ class BaiVietController extends Controller
     public function getThem()
     {
         $chude = ChuDe::all();
-        return view('nhanvien.baiviet.them', compact('chude'));
+        $phim = Phim::all();
+        return view('nhanvien.baiviet.them', compact('chude','phim'));
     }
     public function postThem(Request $request)
     {
@@ -30,6 +32,7 @@ class BaiVietController extends Controller
         ]);$orm = new BaiViet();
         $orm->chude_id = $request->chude_id;
         $orm->user_id = Auth::user()->id;
+        $orm->phim_id = $request->phim_id;
         $orm->tieude = $request->tieude;
         $orm->tieude_slug = Str::slug($request->tieude, '-');
         if(!empty($request->tomtat)) $orm->tomtat = $request->tomtat;
@@ -41,8 +44,9 @@ class BaiVietController extends Controller
     public function getSua($id)
     {
         $chude = ChuDe::all();
+        $phim = Phim::all();
         $baiviet = BaiViet::find($id);
-        return view('nhanvien.baiviet.sua', compact('chude', 'baiviet'));
+        return view('nhanvien.baiviet.sua', compact('chude', 'phim','baiviet'));
     }
     public function postSua(Request $request, $id)
     {
@@ -54,6 +58,7 @@ class BaiVietController extends Controller
         ]);
         $orm = BaiViet::find($id);
         $orm->chude_id = $request->chude_id;
+        $orm->phim_id = $request->phim_id;
         $orm->tieude = $request->tieude;
         $orm->tieude_slug = Str::slug($request->tieude, '-');
         $orm->tomtat = $request->tomtat;

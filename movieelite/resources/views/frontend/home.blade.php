@@ -57,7 +57,7 @@
 				</div>
 	    <div class="product-grid">
 
-            @foreach($value->Phim->take(6) as $p)
+            @foreach($value->Phim->take(5) as $p)
                 @php
                     $thoiluong = ''; // Reset thời lượng cho mỗi bộ phim
                     if(count($p->SuatChieu) > 0) { // Kiểm tra nếu có suất chiếu của bộ phim
@@ -76,14 +76,14 @@
                         <div class="product-details">
                             <h3 class="product-title">{{ $p->tenphim }}</h3>
                             <div class="showtimes">
-                                @if(!empty($thoiluong)) <!-- Kiểm tra nếu có thời lượng -->
+                                @if(!empty($thoiluong))
                                     <div class="showtime">
                                         <span class="start-time">
                                             <i class="fa fa-clock-o"></i>       
                                             {{ $thoiluong }}
                                         </span>
                                         <span class="like-icon">
-                                            <i class="fa fa-heart"></i>
+                                            <a href="{{ route('frontend.baiviet.phim', ['phim_id' => $p->id]) }}"> Chi tiết</a>
                                         </span>
                                     </div>
                                 @endif

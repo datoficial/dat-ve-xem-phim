@@ -25,10 +25,12 @@ Route::name('frontend.')->group(function() {
         Route::get('/lienhe', [HomeController::class, 'getLienHe'])->name('lienhe');
         // Trang sản phẩm
         Route::get('/phim', [HomeController::class, 'getPhim'])->name('phim');
-        Route::get('/phim{tenloai_slug}', [HomeController::class, 'getPhim'])->name('phim.phanloai');
+        Route::get('/phim/{tenloai_slug}', [HomeController::class, 'getPhim'])->name('phim.phanloai');
         Route::get('/phim/{tenloai_slug}/{tenphim_slug}', [HomeController::class, 'getPhim_ChiTiet'])->name('phim.chitiet');
         // Tin tức
         Route::get('/bai-viet', [HomeController::class, 'getBaiViet'])->name('baiviet');
+        Route::get('/bai-viet/{phim_id}', [HomeController::class, 'getBaiViet'])->name('baiviet.phim');
+        
         Route::get('/bai-viet/{tenchude_slug}', [HomeController::class, 'getBaiViet'])->name('baiviet.chude');
         Route::get('/bai-viet/{tenchude_slug}/{tieude_slug}', [HomeController::class, 'getBaiViet_ChiTiet'])->name('baiviet.chitiet');
         // Liên hệ

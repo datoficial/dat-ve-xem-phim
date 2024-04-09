@@ -17,6 +17,10 @@ class BaiViet extends Model
         {
             return $this->belongsTo(User::class, 'user_id', 'id');
         }
+        public function Phim(): BelongsTo
+        {
+            return $this->belongsTo(Phim::class, 'phim_id', 'id');
+        }
         public function BinhLuan(): HasMany
         {
             return $this->hasMany(BinhLuan::class, 'baiviet_id', 'id');
