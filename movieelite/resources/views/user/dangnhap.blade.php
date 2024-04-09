@@ -54,7 +54,7 @@
 							class="fab fa-google-plus-g"></i></a>
 					<a href="#" class="social" style="color: var(--theme-title);"><i class="fab fa-linkedin-in"></i></a>
 				</div>
-				<span>or use your account</span>
+				<span>hoặc sử dụng tài khoản của bạn</span>
                 @csrf
                     @if(session('warning'))
                         <div class="alert alert-danger fs-base" role="alert">
@@ -77,14 +77,14 @@
 		<div class="overlay-container">
 			<div class="overlay">
 				<div class="overlay-panel overlay-left">
-					<h1>Welcome Back!</h1>
-					<p>To keep connected with us please login with your login details</p>
-					<a href="{{route('user.dangnhap')}}"><button class="ghost" id="signIn">Sign In</button></a>
+					<h1>Chào mừng trở lại</h1>
+					<p>Để duy trì kết nối với chúng tôi, vui lòng đăng nhập với thông tin đăng nhập của bạn</p>
+					<a href="{{route('user.dangnhap')}}"><button class="ghost" id="signIn">Đăng nhập</button></a>
 				</div>
 				<div class="overlay-panel overlay-right">
-					<h1>Hello, Friend!</h1>
-					<p>Register and book your tickets now!!!</p>
-					<a href="{{route('user.dangky')}}"><button class="ghost" id="signUp">Sign Up</button></a>
+					<h1>Chào, bạn!</h1>
+					<p>Hãy đăng ký và đặt vé ngay!!!</p>
+					<a href="{{route('user.dangky')}}"><button class="ghost" id="signUp">Đăng ký</button></a>
 				</div>
 			</div>
 		</div>

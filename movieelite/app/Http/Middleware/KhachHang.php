@@ -15,7 +15,7 @@ class KhachHang
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::check() && Auth::user()-> role == 'user'|| Auth::user()-> role == 'admin')
+        if(Auth::check() && Auth::user()-> role == 'user'|| Auth::user()-> role == 'nhanvien'|| Auth::user()-> role == 'admin')
             return $next($request);
         else
             abort(403);

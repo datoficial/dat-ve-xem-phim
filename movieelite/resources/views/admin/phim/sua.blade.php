@@ -44,12 +44,12 @@
 
             <div class="mb-3">
                 <label class="form-label" for="mota">Mô Tả</label>
-                <input type="text" class="form-control @error('mota') is-invalid @enderror" id="mota" name="mota" value="{{ $phim->mota }}">
+                <input type="text" class="form-control @error('mota') is-invalid @enderror" id="mota" name="mota" value="{{$phim->mota}}"></input>
+
                 @error('mota')
                     <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
                 @enderror
             </div>
-
             <div class="mb-3">
                 <label class="form-label" for="trailler">Trailer</label>
                 <input type="text" class="form-control @error('trailler') is-invalid @enderror" id="trailler" name="trailler" value="{{ $phim->trailler }}">
@@ -61,7 +61,7 @@
             <div class="mb-3">
                 <label class="form-label" for="trangthai">Trạng Thái</label>
                 <select class="form-select @error('trangthai') is-invalid @enderror" id="trangthai" name="trangthai" required>
-                    <option value="">{{ $phim->trangthai }}</option>
+                    <option value="">Chọn trạng thái</option>
                     <option value="Đang Chiếu" @if(old('trangthai') == 'Đang Chiếu') selected @endif>Đang Chiếu</option>
                     <option value="Sắp Chiếu" @if(old('trangthai') == 'Sắp Chiếu') selected @endif>Sắp Chiếu</option>
                     <option value="Ngưng Chiếu" @if(old('trangthai') == 'Ngưng Chiếu') selected @endif>Ngưng Chiếu</option>
@@ -70,6 +70,7 @@
                     <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
                 @enderror
             </div>
+
 
 
             <div class="mb-3">

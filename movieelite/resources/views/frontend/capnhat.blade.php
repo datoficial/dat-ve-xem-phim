@@ -32,7 +32,7 @@
 									<div class="d-flex align-items-center">
 										<div class="ps-3">
 											<h5 class="fs-sm mb-0">Tìm kiếm</h5>
-											<span class="text-muted fs-ms">Tìm trong cửa hàng</span>
+											<span class="text-muted fs-ms">Tìm trong web</span>
 										</div>
 									</div>
 								</div>

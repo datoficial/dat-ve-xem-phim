@@ -24,6 +24,7 @@
                     <select class="form-select @error('role') is-invalid @enderror" id="role" name="role" required>
                     <option value="">-- Chọn --</option>
                     <option value="admin" {{ ($nguoidung->role == 'admin') ? 'selected' : '' }}>Quản trị viên</option>
+                    <option value="nhanvien" {{ ($nguoidung->role == 'nhanvien') ? 'selected' : '' }}>Nhân viên</option>
                     <option value="user" {{ ($nguoidung->role == 'user') ? 'selected' : '' }}>Khách hàng</option>
                     </select>
                     @error('role')

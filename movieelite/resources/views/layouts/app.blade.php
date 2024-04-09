@@ -18,9 +18,8 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
-    <link rel="stylesheet" href="{{ asset('public/vendor/font-awesome/css/all.min.css') }}" />
     @yield('css')
-    <link rel="stylesheet" href="{{ asset('public/css/site.css') }}" />
+
 </head>
 <body>
     <div id="app" class="container">
@@ -58,29 +57,28 @@
                                 <a class="nav-link" href="{{ route('admin.suatchieu') }}"><i class="bi bi-calendar"></i> Suất chiếu</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.ve') }}"><i class="bi bi-ticket"></i> Vé</a>
+                                <a class="nav-link" href="{{ route('nhanvien.ve') }}"><i class="bi bi-ticket"></i> Vé</a>
                             </li>                            
-</ul>
-</li>
-                    
+                        </ul>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-pencil"></i> Quản lý bài viết
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('admin.chude') }}">
+                                    <a class="dropdown-item" href="{{ route('nhanvien.chude') }}">
                                     <i class="bi bi-bookmarks"></i> Chủ đề
                                     </a>
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('admin.baiviet') }}">
+                                    <a class="dropdown-item" href="{{ route('nhanvien.baiviet') }}">
                                         <i class="bi bi-file-text"></i> Bài viết
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('admin.binhluan') }}">
+                                    <a class="dropdown-item" href="{{ route('nhanvien.binhluan') }}">
                                         <i class="bi bi-chat"></i> Bình luận bài viết
                                     </a>
                                 </li>

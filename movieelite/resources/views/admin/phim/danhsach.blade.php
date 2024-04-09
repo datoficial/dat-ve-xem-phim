@@ -13,7 +13,7 @@
                         <th width="10%">Tên phim không dấu</th>
                         <th width="5%">Giới hạn tuổi</th>
                         <th width="10%">Quốc gia</th>
-                        <th width="10%">Mô tả sản phẩm</th>
+                        <th width="10%">Mô tả</th>
                         <th width="10%">Traiiler</th>
                         <th width="10%">Trạng thái</th>
                         <th width="10%">Trạng thái</th>

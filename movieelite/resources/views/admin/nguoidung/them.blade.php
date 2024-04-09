@@ -23,6 +23,7 @@
                 <select class="form-select @error('role') is-invalid @enderror" id="role" name="role" required>
                 <option value="">-- Chọn --</option>
                 <option value="admin">Quản trị viên</option>
+                <option value="nhanvien" selected>Nhân viên</option>
                 <option value="user" selected>Khách hàng</option>
                 </select>
                 @error('role')

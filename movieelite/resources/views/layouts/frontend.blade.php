@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>MovieElite</title>
-
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('public/assets/images/icon.jpg') }}" />
 	<link rel="stylesheet" href="{{ asset('public/assets/css/style-starter.css') }}">
 	<link href="//fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap"
 		rel="stylesheet">
@@ -50,7 +50,7 @@
 									</ul>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="{{ route('frontend.capnhat') }}">Tin phim</a>
+							<a class="nav-link" href="{{ route('frontend.baiviet') }}">Tin phim</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="{{ route('frontend.lienhe') }}">Liên hệ</a>

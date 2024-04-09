@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\ChuDe;
 use App\Models\BaiViet;
+use App\Models\BinhLuan;
 
 class HomeController extends Controller
 {
@@ -96,13 +97,13 @@ class HomeController extends Controller
         $orm->save();
         session()->put($daxem, 1);
         }
-        $baivietcungchuyemuc = BaiViet::where('kichhoat', 1)
+        $baivietcungchuyenmuc = BaiViet::where('kichhoat', 1)
         ->where('kiemduyet', 1)
         ->where('chude_id', $baiviet->chude_id)
         ->where('id', '!=', $baiviet_id)
         ->orderBy('created_at', 'desc')
         ->take(4)->get();
-        return view('frontend.baiviet_chitiet', compact('baiviet', 'baivietcungchuyemuc'));
+        return view('frontend.baiviet_chitiet', compact('baiviet', 'baivietcungchuyenmuc'));
     }
     public function getGioHang()
     {

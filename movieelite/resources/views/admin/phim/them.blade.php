@@ -44,11 +44,12 @@
 
             <div class="mb-3">
                 <label class="form-label" for="mota">Mô Tả</label>
-                <input type="text" class="form-control @error('mota') is-invalid @enderror" id="mota" name="mota" value="{{ old('mota') }}">
+                <input type="text" class="form-control @error('mota') is-invalid @enderror" id="mota" name="mota" value="{{ old('mota') }}"></input>
                 @error('mota')
                     <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
                 @enderror
             </div>
+
 
             <div class="mb-3">
                 <label class="form-label" for="trailler">Trailer</label>

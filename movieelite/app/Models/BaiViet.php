@@ -17,8 +17,8 @@ class BaiViet extends Model
         {
             return $this->belongsTo(User::class, 'user_id', 'id');
         }
-        public function BinhLuanBaiViet(): HasMany
+        public function BinhLuan(): HasMany
         {
-            return $this->hasMany(BinhLuanBaiViet::class, 'baiviet_id', 'id');
+            return $this->hasMany(BinhLuan::class, 'baiviet_id', 'id');
         }
 }

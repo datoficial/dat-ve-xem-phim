@@ -12,13 +12,13 @@ class BaiVietController extends Controller
 {
     public function getDanhSach()
     {
-        $baiviet = BaiViet::orderBy('created_at', 'desc')->get();
-        return view('admin.baiviet.danhsach', compact('baiviet'));
+        $baiviet = BaiViet::orderBy('created_at', 'desc')->paginate(25);
+        return view('nhanvien.baiviet.danhsach', compact('baiviet'));
     }
     public function getThem()
     {
         $chude = ChuDe::all();
-        return view('admin.baiviet.them', compact('chude'));
+        return view('nhanvien.baiviet.them', compact('chude'));
     }
     public function postThem(Request $request)
     {
@@ -36,13 +36,13 @@ class BaiVietController extends Controller
         $orm->noidung = $request->noidung;
         $orm->save();
         // Sau khi thêm thành công thì tự động chuyển về trang danh sách
-        return redirect()->route('admin.baiviet');
+        return redirect()->route('nhanvien.baiviet');
     }
     public function getSua($id)
     {
         $chude = ChuDe::all();
         $baiviet = BaiViet::find($id);
-        return view('admin.baiviet.sua', compact('chude', 'baiviet'));
+        return view('nhanvien.baiviet.sua', compact('chude', 'baiviet'));
     }
     public function postSua(Request $request, $id)
     {
@@ -60,27 +60,27 @@ class BaiVietController extends Controller
         $orm->noidung = $request->noidung;
         $orm->save();
         // Sau khi sửa thành công thì tự động chuyển về trang danh sách
-        return redirect()->route('admin.baiviet');
+        return redirect()->route('nhanvien.baiviet');
     }
     public function getXoa($id)
     {
         $orm = BaiViet::find($id);
         $orm->delete();
         // Sau khi xóa thành công thì tự động chuyển về trang danh sách
-        return redirect()->route('admin.baiviet');}
+        return redirect()->route('nhanvien.baiviet');}
     public function getKiemDuyet($id)
     {
         $orm = BaiViet::find($id);
         $orm->kiemduyet = 1 - $orm->kiemduyet;
         $orm->save();
-        return redirect()->route('admin.baiviet');
+        return redirect()->route('nhanvien.baiviet');
     }
     public function getKichHoat($id)
     {
         $orm = BaiViet::find($id);
         $orm->kichhoat = 1 - $orm->kichhoat;
         $orm->save();
-        return redirect()->route('admin.baiviet');
+        return redirect()->route('nhanvien.baiviet');
     }
 
 }

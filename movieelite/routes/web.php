@@ -49,7 +49,7 @@ Route::name('frontend.')->group(function() {
     });
     
     // Trang tài khoản khách hàng
-    Route::prefix('khach-hang')->name('user.')->group(function() {
+    Route::prefix('khach-hang')->name('user.')->middleware(['auth','user'])->group(function() {
         // Trang chủ
         Route::get('/', [KhachHangController::class, 'getHome'])->name('home');
         Route::get('/home', [KhachHangController::class, 'getHome'])->name('home');
@@ -61,7 +61,8 @@ Route::name('frontend.')->group(function() {
         // Đăng xuất
         Route::post('/dang-xuat', [KhachHangController::class, 'postDangXuat'])->name('dangxuat');
     });
-Route::prefix('admin')->name('admin.')->group(function() {
+    
+    Route::prefix('admin')->name('admin.')->middleware(['auth','manager'])->group(function() {
     Route::get('/', [AdminController::class, 'getHome'])->name('home');
     Route::get('/home', [AdminController::class, 'getHome'])->name('home');
 
@@ -107,8 +108,12 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::get('/nguoidung/sua/{id}', [UserController::class, 'getSua'])->name('nguoidung.sua');
     Route::post('/nguoidung/sua/{id}', [UserController::class, 'postSua'])->name('nguoidung.sua');
     Route::get('/nguoidung/xoa/{id}', [UserController::class, 'getXoa'])->name('nguoidung.xoa');
+    });
 
-
+    Route::prefix('nhanvien')->name('nhanvien.')->middleware(['auth','nhanvien'])->group(function() {
+    Route::get('/', [AdminController::class, 'getHome'])->name('home');
+    Route::get('/home', [AdminController::class, 'getHome'])->name('home');
+    
     Route::get('/ve', [VeController::class, 'getDanhSach'])->name('ve');
     Route::get('/ve/them', [VeController::class, 'getThem'])->name('ve.them');
     Route::post('/ve/them', [VeController::class, 'postThem'])->name('ve.them');
