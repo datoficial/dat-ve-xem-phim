@@ -19,18 +19,6 @@
                         <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
                     @enderror
                 </div>
-                <div class="mb-3">
-                    <label class="form-label" for="role">Quyền hạn</label>
-                    <select class="form-select @error('role') is-invalid @enderror" id="role" name="role" required>
-                    <option value="">-- Chọn --</option>
-                    <option value="admin" {{ ($nguoidung->role == 'admin') ? 'selected' : '' }}>Quản trị viên</option>
-                    <option value="nhanvien" {{ ($nguoidung->role == 'nhanvien') ? 'selected' : '' }}>Nhân viên</option>
-                    <option value="user" {{ ($nguoidung->role == 'user') ? 'selected' : '' }}>Khách hàng</option>
-                    </select>
-                    @error('role')
-                        <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
-                    @enderror
-                </div>
                 <div class="mb-3 form-check">
                     <input class="form-check-input" type="checkbox" id="change_password_checkbox" name="change_password_checkbox" /><label class="form-check-label" for="change_password_checkbox">Đổi mật khẩu</label>
                     </div>
@@ -49,6 +37,46 @@
                         <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
                     @enderror
                 </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="gioitinh">Giới tính</label>
+                    <input type="text" class="form-control @error('gioitinh') is-invalid @enderror" id="gioitinh" name="gioitinh" value="{{ $nguoidung->gioitinh }}" required/>
+                    @error('gioitinh')
+                        <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="namsinh">Năm sinh</label>
+                    <input type="date" class="form-control @error('namsinh') is-invalid @enderror" id="namsinh" name="namsinh" value="{{ $nguoidung->namsinh }}" required/>
+                    @error('namsinh')
+                        <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="sodienthoai">Số điện thoại</label>
+                    <input type="text" class="form-control @error('sodienthoai') is-invalid @enderror" id="sodienthoai" name="sodienthoai" value="{{ $nguoidung->sodienthoai }}" required/>
+                    @error('sodienthoai')
+                        <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="diachi">Địa chỉ</label>
+                    <input type="text" class="form-control @error('diachi') is-invalid @enderror" id="diachi" name="diachi" value="{{ $nguoidung->diachi }}" required/>
+                    @error('diachi')
+                        <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="role">Quyền hạn</label>
+                    <select class="form-select @error('role') is-invalid @enderror" id="role" name="role" required>
+                    <option value="">-- Chọn --</option>
+                    <option value="admin" {{ ($nguoidung->role == 'admin') ? 'selected' : '' }}>Quản trị viên</option>
+                    <option value="nhanvien" {{ ($nguoidung->role == 'nhanvien') ? 'selected' : '' }}>Nhân viên</option>
+                    <option value="user" {{ ($nguoidung->role == 'user') ? 'selected' : '' }}>Khách hàng</option>
+                    </select>
+                    @error('role')
+                        <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
+                    @enderror
                 </div>
                 <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Cập nhật</button>
             </form>
