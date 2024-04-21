@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>MovieElite</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('public/assets/images/icon.jpg') }}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('public/assets/images/icon.png') }}" />
 	<link rel="stylesheet" href="{{ asset('public/assets/css/style-starter.css') }}">
 	<link href="//fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap"
 		rel="stylesheet">
@@ -20,9 +20,8 @@
 		<!--/nav-->
 		<nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
 			<div class="container">
-				<h1><a class="navbar-brand" href="{{ route('frontend.home') }}"><span class="fa fa-play icon-log"
-							aria-hidden="true"></span>
-						MovieElite</a></h1>
+				<h1><a class="navbar-brand" href="{{ route('frontend.home') }}"><img src="{{ asset('public/assets/images/icon.png') }}"/>
+						</a></h1>
 				<!-- if logo is image enable this   
 						<a class="navbar-brand" href="#{{ route('frontend.home') }}">
 							<img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
@@ -40,23 +39,14 @@
 						<li class="nav-item active">
 							<a class="nav-link" href="{{ route('frontend.home') }}">Trang chủ</a>
 						</li>
-						<li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown" data-bs-auto-close="outside">Thể loại phim</a>
-									<ul class="dropdown-menu">
-										<li><a class="dropdown-item" href="{{ route('frontend.capnhat') }}">Phim hot</a></li>
-										<li><a class="dropdown-item" href="{{ route('frontend.capnhat') }}">Tình cảm</a></li>
-										<li><a class="dropdown-item" href="{{ route('frontend.capnhat') }}">Hoạt hình</a></li>
-										<li><a class="dropdown-item" href="{{ route('frontend.capnhat') }}">Hành động</a></li>
-									</ul>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ route('frontend.capnhat') }}">Lịch chiếu</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="{{ route('frontend.baiviet') }}">Tin phim</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="{{ route('frontend.lienhe') }}">Liên hệ</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="{{ route('frontend.capnhat') }}">Giới thiệu</a>
 						</li>
 					</ul>
 					<!--/search-right-->

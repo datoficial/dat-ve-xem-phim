@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="card">
+    <div class="main-panel">
         <div class="card-header">Sửa phim</div>
         <div class="card-body">
         <form action="{{ route('admin.phim.sua', ['id' => $phim->id]) }}" method="post" enctype="multipart/form-data">

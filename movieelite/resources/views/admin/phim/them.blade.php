@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="card">
+    <div class="main-panel">
         <div class="card-header">Thêm phim</div>
         <div class="card-body">
         <form action="{{ route('admin.phim.them') }}" method="post" enctype="multipart/form-data">
