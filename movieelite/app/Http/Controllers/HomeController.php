@@ -5,12 +5,17 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\TheLoaiPhim;
 use App\Models\Phim;
+use App\Models\PhongChieu;
+use App\Models\RapChieu;
+use App\Models\SuatChieu;
+use App\Models\Ve;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\ChuDe;
 use App\Models\BaiViet;
 use App\Models\BinhLuan;
+use Illuminate\Support\Carbon;
 
 class HomeController extends Controller
 {
@@ -26,6 +31,33 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    public function getPhimTheoRap($tenrap_slug = '')
+    {
+            // Lấy thông tin rạp chiếu tương ứng với slug
+            $rapchieu = RapChieu::where('tenrap_slug', $tenrap_slug)->first();
+    
+            // Kiểm tra xem rạp chiếu có tồn tại không. Nếu không tồn tại, điều hướng hoặc xử lý tùy thuộc vào yêu cầu của bạn
+
+                // Lấy danh sách phim tương ứng với rạp chiếu
+                $phim = Phim::whereHas('SuatChieu', function ($query) use ($rapchieu) {
+                    $query->whereHas('phongchieu', function ($subQuery) use ($rapchieu) {
+                        $subQuery->where('rapchieu_id', $rapchieu->id);
+                    });
+                })->with('TheLoaiPhim', 'BaiViet')->get();
+    
+                return view('frontend.phimtheorap', compact('phim', 'rapchieu'));
+
+    }
+    
+    public function getTimKiem(Request $request)
+    {
+        $searchTerm = $request->input('search');
+        $phim = Phim::where('tenphim', 'like', "%$searchTerm%")
+                       ->get();
+
+        return view('frontend.timkiemphim', compact('phim','searchTerm'));
+       
+    }
     public function getCapNhat()
     {
     

@@ -21,8 +21,10 @@ Route::name('frontend.')->group(function() {
         // Trang chủ
         Route::get('/', [HomeController::class, 'getHome'])->name('home');
         Route::get('/home', [HomeController::class, 'getHome'])->name('home');
-        Route::get('/capnhat', [HomeController::class, 'getCapNhat'])->name('capnhat');
-        Route::get('/lienhe', [HomeController::class, 'getLienHe'])->name('lienhe');
+        Route::get('/cap-nhat', [HomeController::class, 'getCapNhat'])->name('capnhat');
+        Route::get('/phim-cua-rap/{tenrap_slug}', [HomeController::class, 'getPhimTheoRap'])->name('phim.theorap');
+        Route::get('/lien-he', [HomeController::class, 'getLienHe'])->name('lienhe');
+        Route::get('/tim-kiem', [HomeController::class, 'getTimKiem'])->name('timkiem');
         // Trang sản phẩm
         Route::get('/phim', [HomeController::class, 'getPhim'])->name('phim');
         Route::get('/phim/{tenloai_slug}', [HomeController::class, 'getPhim'])->name('phim.phanloai');
@@ -48,6 +50,7 @@ Route::name('frontend.')->group(function() {
         Route::get('/dat-ve', [DatVeController::class, 'getChonGhe'])->name('chonghe');
         Route::post('/dat-ve/{phim_id}', [DatVeController::class, 'postDatVe'])->name('datve');
         Route::get('/dat-ve-thanh-cong', [DatVeController::class, 'getDatVeThanhCong'])->name('datvethanhcong');
+        Route::post('/vnpay_payment', [DatVeController::class, 'postVNPay'])->name('vnpay');
     });
     
     // Trang tài khoản khách hàng

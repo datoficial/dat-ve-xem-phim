@@ -12,6 +12,7 @@
 		
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 		@yield('style')
+
 		<link rel="stylesheet" href="{{ asset('public/theme.min.css') }}" />
 </head>
 
@@ -39,8 +40,29 @@
 						<li class="nav-item active">
 							<a class="nav-link" href="{{ route('frontend.home') }}">Trang chủ</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="{{ route('frontend.capnhat') }}">Lịch chiếu</a>
+						<li class="nav-item dropdown">
+							<a class="nav-link" data-bs-toggle="dropdown" data-bs-auto-close="outside">Rạp chiếu</a>
+							<ul class="dropdown-menu">
+								<li class="dropdown-item dropdown">
+									<a class="nav-link" data-bs-toggle="dropdown" data-bs-auto-close="outside">An Giang</a>
+									<ul class="dropdown-menu">
+										<li><a class="dropdown-item" href="{{ route('frontend.phim.theorap', ['tenrap_slug' => 'galaxy-long-xuyen']) }}">Galaxy Long Xuyên</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.phim.theorap', ['tenrap_slug' => 'lotte-long-xuyen']) }}">Lotte Long Xuyên</a></li>
+									</ul>
+								</li>
+								<li class="dropdown-item dropdown">
+									<a class="nav-link " data-bs-toggle="dropdown" data-bs-auto-close="outside">Đồng Tháp</a>
+									<ul class="dropdown-menu">
+										<li><a class="dropdown-item" href="{{ route('frontend.phim.theorap', ['tenrap_slug' => 'cgv-vincom-cao-lanh']) }}">CGV Vincom Cao Lãnh</a></li>
+									</ul>
+								</li>
+								<li class="dropdown-item dropdown">
+									<a class="nav-link " data-bs-toggle="dropdown" data-bs-auto-close="outside">Cần Thơ</a>
+									<ul class="dropdown-menu">
+										<li><a class="dropdown-item" href="{{ route('frontend.phim.theorap', ['tenrap_slug' => 'lotte-cinema-ninh-kieu']) }}">Lotte Cinema Ninh Kiều</a></li>
+									</ul>
+								</li>
+							</ul>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="{{ route('frontend.baiviet') }}">Tin phim</a>
@@ -57,18 +79,12 @@
 						<!-- search popup -->
 						<div id="search" class="pop-overlay">
 							<div class="popup">
-								<form action="#" method="post" class="search-box">
+								<form action="{{route('frontend.timkiem')}}" method="get" class="search-box">
 									<input type="search" placeholder="Search your Keyword" name="search"
 										required="required" autofocus="">
 									<button type="submit" class="btn"><span class="fa fa-search"
 											aria-hidden="true"></span></button>
 								</form>
-								<div class="browse-items">
-									<h3 class="hny-title two mt-md-5 mt-4">Tìm theo loại:</h3>
-									<ul class="search-items">
-										<li><a href="{{ route('frontend.capnhat') }}">Hành động</a></li>
-									</ul>
-								</div>
 							</div>
 							<a class="close" href="#close">×</a>
 						</div>
@@ -116,131 +132,128 @@
 	</main>
 
 	<!-- footer-66 -->
-	@if(!Request::is('user.dangnhap'))
-	<footer class="w3l-footer">
-		<section class="footer-inner-main">
-			<div class="footer-hny-grids py-5">
-				<div class="container py-lg-4">
-					<div class="text-txt">
-						<div class="right-side">
-							<div class="row footer-about">
-								<div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
-									<a href="movies.html"><img class="img-fluid" src="{{ asset('public/assets/images/banner1.jpg') }}"
-											alt=""></a>
+		<footer class="w3l-footer">
+			<section class="footer-inner-main">
+				<div class="footer-hny-grids py-5">
+					<div class="container py-lg-4">
+						<div class="text-txt">
+							<div class="right-side">
+								<div class="row footer-about">
+									<div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+										<a href="javascript:void(0)"><img class="img-fluid" src="{{ asset('public/assets/images/banner1.jpg') }}"
+												alt=""></a>
+									</div>
+									<div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+										<a href="javascript:void(0)"><img class="img-fluid" src="{{ asset('public/assets/images/banner2.jpg') }}"
+												alt=""></a>
+									</div>
+									<div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+										<a href="javascript:void(0)"><img class="img-fluid" src="{{ asset('public/assets/images/banner3.jpg') }}"
+												alt=""></a>
+									</div>
+									<div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+										<a href="javascript:void(0)"><img class="img-fluid" src="{{ asset('public/assets/images/banner4.jpg') }}"
+												alt=""></a>
+									</div>
 								</div>
-								<div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
-									<a href="movies.html"><img class="img-fluid" src="{{ asset('public/assets/images/banner2.jpg') }}"
-											alt=""></a>
-								</div>
-								<div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
-									<a href="movies.html"><img class="img-fluid" src="{{ asset('public/assets/images/banner3.jpg') }}"
-											alt=""></a>
-								</div>
-								<div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
-									<a href="movies.html"><img class="img-fluid" src="{{ asset('public/assets/images/banner4.jpg') }}"
-											alt=""></a>
-								</div>
-							</div>
-							<div class="row footer-links">
+								<div class="row footer-links">
 
 
-								<div class="col-md-3 col-sm-6 sub-two-right mt-5">
-									<h6>Movies</h6>
-									<ul>
-										<li><a href="#">Movies</a></li>
-										<li><a href="#">Videos</a></li>
-										<li><a href="#">English Movies</a></li>
-										<li><a href="#">Tailor</a></li>
-										<li><a href="#">Upcoming Movies</a></li>
-										<li><a href="Contact_Us.html">Contact Us</a></li>
-									</ul>
-								</div>
-								<div class="col-md-3 col-sm-6 sub-two-right mt-5">
-									<h6>Information</h6>
-									<ul>
-										<li><a href="{{ route('frontend.home') }}">Home</a> </li>
-										<li><a href="about.html">About</a> </li>
-										<li><a href="#">Tv Series</a> </li>
-										<li><a href="#">Blogs</a> </li>
-										<li><a href="sign_in.html">Login</a></li>
-										<li><a href="Contact_Us.html">Contact</a></li>
-									</ul>
-								</div>
-								<div class="col-md-3 col-sm-6 sub-two-right mt-5">
-									<h6>Locations</h6>
-									<ul>
-										<li><a href="movies.html">Asia</a></li>
-										<li><a href="movies.html">France</a></li>
-										<li><a href="movies.html">Taiwan</a></li>
-										<li><a href="movies.html">United States</a></li>
-										<li><a href="movies.html">Korea</a></li>
-										<li><a href="movies.html">United Kingdom</a></li>
-									</ul>
-								</div>
-								<div class="col-md-3 col-sm-6 sub-two-right mt-5">
-									<h6>Newsletter</h6>
-									<form action="#" class="subscribe mb-3" method="post">
-										<input type="email" name="email" placeholder="Your Email Address" required="">
-										<button><span class="fa fa-envelope-o"></span></button>
-									</form>
-									<p>Enter your email and receive the latest news, updates and special offers from us.
-									</p>
+									<div class="col-md-3 col-sm-6 sub-two-right mt-5">
+										<h6>Phim</h6>
+										<ul>
+											<li><a href="javascript:void(0)">Phim</a></li>
+											<li><a href="javascript:void(0)">Video</a></li>
+											<li><a href="javascript:void(0)">Phim tiếng Anh</a></li>
+											<li><a href="javascript:void(0)">Đoạt giải</a></li>
+											<li><a href="javascript:void(0)">Phim sắp ra mắt</a></li>
+											<li><a href="{{ route('frontend.lienhe') }}">Liên hệ</a></li>
+										</ul>
+									</div>
+									<div class="col-md-3 col-sm-6 sub-two-right mt-5">
+										<h6>Thông tin</h6>
+										<ul>
+											<li><a href="{{ route('frontend.home') }}">Trang chủ</a> </li>
+											<li><a href="{{ route('frontend.lienhe') }}">Liên hệ</a> </li>
+											<li><a href="javascript:void(0)">Phim truyền hình</a> </li>
+											<li><a href="javascript:void(0)">Blog</a> </li>
+											<li><a href="sign_in.html">Đăng nhập</a></li>
+											<li><a href="Contact_Us.html">Liên hệ</a></li>
+										</ul>
+									</div>
+									<div class="col-md-3 col-sm-6 sub-two-right mt-5">
+										<h6>Địa điểm</h6>
+										<ul>
+											<li><a href="javascript:void(0)">An Giang</a></li>
+											<li><a href="javascript:void(0)">Đồng Tháp</a></li>
+											<li><a href="javascript:void(0)">Cần Thơ</a></li>
+										</ul>
+									</div>
+									<div class="col-md-3 col-sm-6 sub-two-right mt-5">
+										<h6>Thông báo</h6>
+										<form action="#" class="subscribe mb-3" method="post">
+											<input type="email" name="email" placeholder="Địa chỉ Email của bạn" required="">
+											<button><span class="fa fa-envelope-o"></span></button>
+										</form>
+										<p>Nhập email của bạn và nhận tin tức, cập nhật và ưu đãi đặc biệt mới nhất từ chúng tôi.
+										</p>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			</div>
-			<div class="below-section">
-				<div class="container">
-					<div class="copyright-footer">
-						<div class="columns text-lg-left">
-							<p>&copy; 2021 MyShowz. All rights reserved</p>
-					   </div>
+				</div>
+				<div class="below-section">
+					<div class="container">
+						<div class="copyright-footer">
+							<div class="columns text-lg-left">
+								<p>&copy; 2021 MovieElite. Bản quyền thuộc về Nguyễn Phát Đạt</p>
+						</div>
 
-						<ul class="social text-lg-right">
-							<li><a href="#facebook"><span class="fa fa-facebook" aria-hidden="true"></span></a>
-							</li>
-							<li><a href="#linkedin"><span class="fa fa-linkedin" aria-hidden="true"></span></a>
-							</li>
-							<li><a href="#twitter"><span class="fa fa-twitter" aria-hidden="true"></span></a>
-							</li>
-							<li><a href="#google"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
-							</li>
+							<ul class="social text-lg-right">
+								<li><a href="#facebook"><span class="fa fa-facebook" aria-hidden="true"></span></a>
+								</li>
+								<li><a href="#linkedin"><span class="fa fa-linkedin" aria-hidden="true"></span></a>
+								</li>
+								<li><a href="#twitter"><span class="fa fa-twitter" aria-hidden="true"></span></a>
+								</li>
+								<li><a href="#google"><span class="fa fa-google-plus" aria-hidden="true"></span></a>
+								</li>
 
-						</ul>
+							</ul>
+						</div>
 					</div>
 				</div>
-			</div>
-			<!-- move top -->
-			<button onclick="topFunction()" id="movetop" title="Go to top">
-				<span class="fa fa-arrow-up" aria-hidden="true"></span>
-			</button>
-<script>
-				// When the user scrolls down 20px from the top of the document, show the button
-				window.onscroll = function () {
-					scrollFunction()
-				};
+				<!-- move top -->
+				<button onclick="topFunction()" id="movetop" title="Đi đến đầu trang">
+					<span class="fa fa-arrow-up" aria-hidden="true"></span>
+				</button>
+	<script>
+					// Khi người dùng cuộn xuống 20px từ đầu trang, hiển thị nút
+					window.onscroll = function () {
+						scrollFunction()
+					};
 
-				function scrollFunction() {
-					if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-						document.getElementById("movetop").style.display = "block";
-					} else {
-						document.getElementById("movetop").style.display = "none";
+					function scrollFunction() {
+						if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+							document.getElementById("movetop").style.display = "block";
+						} else {
+							document.getElementById("movetop").style.display = "none";
+						}
 					}
-				}
 
-				// When the user clicks on the button, scroll to the top of the document
-				function topFunction() {
-					document.body.scrollTop = 0;
-					document.documentElement.scrollTop = 0;
-				}
-</script>
+					// Khi người dùng nhấp vào nút, cuộn lên đầu trang
+					function topFunction() {
+						document.body.scrollTop = 0;
+						document.documentElement.scrollTop = 0;
+					}
+	</script>
 
-		</section>
-	</footer>
-	@endif
+			</section>
+		</footer>
+
+
 </body>
 </html>
 <!-- responsive tabs -->

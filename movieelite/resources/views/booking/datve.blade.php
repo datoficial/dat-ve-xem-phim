@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 @section('title', 'Trang chủ')
 @section('content')
-<!-- Chọn lịch chiếu -->
+
   <div class="container" id="progress-container-id">
     <div class="row">
       <div class="col">
@@ -15,6 +15,7 @@
               <li id="step4" class="not_active">Vé của bạn</li>
             </ul>
             <br>
+            <!-- Bước 1 Chọn lịch chiếu -->
             <fieldset>
               <div id="screen-select-div">
                   <h2>Chọn ngày chiếu</h2>
@@ -39,14 +40,13 @@
                               @endforeach
                       </div>
                       <ul class="time-ul" id="time-list">
-                      
                       </ul>
               </div>
               <input id="screen-next-btn" type="button" name="next-step" class="next-step" value="Tiếp tục đặt vé" disabled />
               <input type="hidden" name="suatchieu_id" id="suatchieu_id">
             </fieldset>
 
-            <!-- Chọn ghế ngồi -->
+            <!-- Bước 2 Chọn ghế ngồi -->
             <fieldset>
             <div>
             <iframe id="seat-sel-iframe"
@@ -57,8 +57,9 @@
             <input type="button" name="next-step" class="next-step" value="Thanh Toán" />
             <input type="button" name="previous-step" class="previous-step" value="Trở lại" />
             </fieldset>
-            <fieldset>
-          <!-- Payment Page -->
+
+  <!-- Bước 3 Payment Page -->
+          <fieldset>
           <div id="payment_div">
             <div class="payment-row">
               <div class="col-75">
@@ -98,6 +99,7 @@
               <input type="button" name="previous-step" class="cancel-pay-btn" value="Hủy thanh toán"
                   onclick="location.href='{{ route('frontend.home') }}';" />
           </fieldset>
+          <!-- Bước 4 xem vé  -->
           <fieldset>
           <h2>E-Ticket</h2>
           <div class="ticket-body">
@@ -149,7 +151,7 @@
 
             </div>
           </div>
-          <input type="submit" name="previous-step" class="home-page-btn" value="Hoàn tất đặt hàng"/>
+            <input type="submit" name="previous-step" class="home-page-btn" value="Hoàn tất đặt hàng"/>
             </fieldset>
             <input type="hidden" name="user_id" value="{{ Auth::id() }}">
             <!-- Các trường input cho thông tin ghế -->
@@ -329,9 +331,8 @@ function selectDate(ngaychieu) {
         li.innerHTML = `
             <div class="time-btn">
             <div class="screens">
-    ${giochieu.phongchieu.tenphong} của rạp ${giochieu.phongchieu.rapchieu.tenrap}
-</div>
-
+                  ${giochieu.phongchieu.tenphong} của rạp ${giochieu.phongchieu.rapchieu.tenrap}
+            </div>
                 <button class="screen-time" onclick="timeFunction(); selectTime(${giochieu.id})">
                     ${giobatdauFormatted}
                 </button>
@@ -368,11 +369,11 @@ function selectDate(ngaychieu) {
         document.getElementById('giave').value = giave;
 
 
-
         document.getElementById('tenghe1').innerText = tenghe;
         document.getElementById('soluong1').innerText = soluong;
         document.getElementById('giave1').innerText = giave;
     });
 </script>
+
 
 @endsection

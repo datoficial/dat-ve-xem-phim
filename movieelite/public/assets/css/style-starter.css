@@ -2802,7 +2802,7 @@ fieldset:disabled a.btn {
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 .btn-primary:not(:disabled):not(.disabled).active:focus,
 .show>.btn-primary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(220, 82, 99, 0.5);
+  box-shadow: red;
 }
 
 .btn-secondary {
@@ -3678,7 +3678,6 @@ input[type="button"].btn-block {
   font-weight: 400;
   color: #212529;
   text-align: inherit;
-  white-space: nowrap;
   background-color: transparent;
   border: 0;
 }
@@ -14476,7 +14475,6 @@ p.title-para {
 }
 
 .navbar-expand-lg .navbar-nav .dropdown-menu:before {
-  content: '';
   width: 14px;
   height: 14px;
   background: #fff;

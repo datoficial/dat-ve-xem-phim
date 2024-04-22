@@ -15,6 +15,7 @@ use Milon\Barcode\DNS2D;
 class DatVeController extends Controller
 {
 
+   
     public function getDatVe(Request $request, $phim_id)
     {
         if(Auth::check()) {

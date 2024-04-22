@@ -1,63 +1,73 @@
 @extends('layouts.frontend')
 @section('title', 'Trang chủ')
 @section('content')
-<section class="w3l-main-slider position-relative" id="home">
-		<div class="companies20-content">
-			<div class="owl-one owl-carousel owl-theme">
-				@php $index = 1 @endphp 
-				@foreach($theloaiphim as $value)
-					@foreach($value->Phim as $p)
-						@php 
-							$banner_url = env('APP_URL') . '/storage/app/' . $p->hinhanh; 
-						@endphp
-						<div class="item">
-							<div class="slider-info banner-view bg bg2" style="background-image: url('{{ $banner_url }}');">
-								<div class="banner-info">
-									<h3>Trailer {{ $p->tenphim }}</h3>
-									<p><span class="over-para">{{ $p->mota }}</span></p>
-										<a href="#small-dialog{{$index}}" class="popup-with-zoom-anim play-view1">
-											<span class="video-play-icon">
-												<span class="fa fa-play"></span>
-											</span>
-											<h6>Xem Trailer</h6>
-										</a>
-										<div id="small-dialog{{$index}}" class="zoom-anim-dialog mfp-hide">
-											<iframe src="{{ $p->trailler }}" allow="autoplay; fullscreen" allowfullscreen=""></iframe>
-										</div>
-								</div>
-							</div>
-						</div>
-						@php 
-							$index++; 
-							if ($index > 4) break 2; 
-						@endphp 
-					@endforeach
-				@endforeach
-			</div>
-		</div>
-</section>
-
-
-	<!-- main-slider -->
-	<!--grids-sec1-->
-	@foreach($theloaiphim as $value)
-
 	<section class="w3l-grids">
 		<div class="grids-main py-5">
-			<div class="container py-lg-3">
+        <div class="container py-lg-5 pt-12">
 				<div class="headerhny-title">
 					<div class="w3l-title-grids">
 						<div class="headerhny-left">
-							<h3 class="hny-title">{{ $value->tenloai }}</h3>
-						</div>
-						<div class="headerhny-right text-lg-right">
-							<h4><a class="show-title" href="{{ route('frontend.capnhat') }}">Xem tất cả</a></h4>
+							<h3>Kết quả tìm kiếm của từ khóa "{{$searchTerm}}"</h3>
 						</div>
 					</div>
 				</div>
+        @if ($phim->isEmpty())
+        <div class="row justify-content-center pt-lg-4 text-center">
+				<div class="col-lg-5 col-md-7 col-sm-9">
+                <img src="{{ asset('public/assets/images/khongtimthay.png')}}" width="600px" height="350px"/>
+					<h2 class="h3 mb-4"></h2>
+					<h2 class="h3 mb-4"></h2>
+					<h3 class="h5 fw-normal mb-4"></h3>
+					<p class="fs-md mb-4">
+						<u>Dưới đây là một số liên kết gợi ý:</u>
+					</p>
+				</div>
+		</div>
+        <div class="row justify-content-center">
+				<div class="col-xl-8 col-lg-10">
+					<div class="row">
+						<div class="col-md-4 mb-3">
+							<a class="card h-100 border-0 shadow-sm" href="{{ route('frontend.home') }}">
+								<div class="card-body">
+									<div class="d-flex align-items-center">
+										<div class="ps-3">
+											<h5 class="fs-sm mb-0">Trang chủ</h5>
+											<span class="text-muted fs-ms">Quay lại trang chủ</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+						<div class="col-md-4 mb-3">
+							<a class="card h-100 border-0 shadow-sm" href="{{route('frontend.baiviet')}}">
+								<div class="card-body">
+									<div class="d-flex align-items-center">
+										<div class="ps-3">
+											<h5 class="fs-sm mb-0">Tin tức</h5>
+											<span class="text-muted fs-ms">Truy cập trang tin phim</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+                        <div class="col-md-4 mb-3">
+						<a class="card h-100 border-0 shadow-sm" href="{{route('frontend.lienhe')}}">
+								<div class="card-body">
+									<div class="d-flex align-items-center">
+										<div class="ps-3">
+											<h5 class="fs-sm mb-0">Liên hệ</h5>
+											<span class="text-muted fs-ms">Truy cập trang liên hệ</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+        @else
 	    <div class="product-grid">
-
-            @foreach($value->Phim->take(5) as $p)
+        @foreach ($phim as $p)
                 @php
                     $thoiluong = ''; // Reset thời lượng cho mỗi bộ phim
                     if(count($p->SuatChieu) > 0) { // Kiểm tra nếu có suất chiếu của bộ phim
@@ -67,7 +77,6 @@
                         $thoiluong = $batdau->diffInMinutes($ketthuc) . ' phút'; 
                     }
                 @endphp
-
                 <div class="product-item">
                     <a href="{{ route('booking.datve', ['phim_id' => $p->id]) }}">
                         <div class="product-image">
@@ -92,12 +101,11 @@
                     </a>
                 </div>
             @endforeach
+            @endif
             </div>
 			</div>
 		</div>
 	</section>
-
-@endforeach
 @endsection
 @section('javascript')
 <script type="text/javascript">

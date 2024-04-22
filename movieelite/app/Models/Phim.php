@@ -21,4 +21,5 @@ class Phim extends Model
     {
         return $this->hasMany(BaiViet::class, 'phim_id', 'id');
     }
+
 }

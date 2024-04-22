@@ -31,24 +31,24 @@
 							</a>
 						</div>
 						<div class="col-md-4 mb-3">
-						<a class="card h-100 border-0 shadow-sm" href="javascript:void(0)">
+							<a class="card h-100 border-0 shadow-sm" href="{{route('frontend.baiviet')}}">
 								<div class="card-body">
 									<div class="d-flex align-items-center">
 										<div class="ps-3">
-											<h5 class="fs-sm mb-0">Tìm kiếm</h5>
-											<span class="text-muted fs-ms">Tìm trong web</span>
+											<h5 class="fs-sm mb-0">Tin tức & Trợ giúp</h5>
+											<span class="text-muted fs-ms">Truy cập trang tin phim</span>
 										</div>
 									</div>
 								</div>
 							</a>
 						</div>
 						<div class="col-md-4 mb-3">
-							<a class="card h-100 border-0 shadow-sm" href="javascript:void(0)">
+						<a class="card h-100 border-0 shadow-sm" href="{{route('frontend.lienhe')}}">
 								<div class="card-body">
 									<div class="d-flex align-items-center">
 										<div class="ps-3">
-											<h5 class="fs-sm mb-0">Tin tức & Trợ giúp</h5>
-											<span class="text-muted fs-ms">Truy cập trang tin phim</span>
+											<h5 class="fs-sm mb-0">Liên hệ</h5>
+											<span class="text-muted fs-ms">Truy cập trang liên hệ</span>
 										</div>
 									</div>
 								</div>
