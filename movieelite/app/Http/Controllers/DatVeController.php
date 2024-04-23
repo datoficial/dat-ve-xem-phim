@@ -78,10 +78,7 @@ public function postVNPay(Request $request)
     }
     $returnData = array('code' => '00', 'message' => 'success', 'data' => $vnp_Url);
 
-    if (isset($_POST['redirect'])) {
-        header('Location: ' . $vnp_Url);
-        exit(); // Thêm exit() để dừng thực thi ngay sau khi chuyển hướng
-    }
+    
 
     // Tạo và lưu vé vào cơ sở dữ liệu
     $ve = new Ve();
@@ -114,10 +111,15 @@ public function postVNPay(Request $request)
         session(['qrCodeFileName' => 'qrcodes/' . $barcodeFilename]);
 
         // Redirect đến trang "datvethanhcong"
-        return redirect()->route('booking.datvethanhcong');
+        // return redirect()->route('booking.datvethanhcong');
     } else {
         // Xử lý lỗi khi dữ liệu không hợp lệ
         return response()->json(['error' => 'Dữ liệu không hợp lệ'], 400);
+    }
+    
+    if (isset($_POST['redirect'])) {
+        header('Location: ' . $vnp_Url);
+        exit(); // Thêm exit() để dừng thực thi ngay sau khi chuyển hướng
     }
 }
 
