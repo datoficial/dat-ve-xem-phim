@@ -54,7 +54,7 @@
                 @enderror
             </div>
 
-                <button type="submit" class="btn btn-primary"><i class="fa-light fa-save"></i> Thêm vào CSDL</button>
+                <button type="submit" class="btn btn-primary"><i class="bi bi-plus"></i> Thêm vào CSDL</button>
         </form>
         </div>
     </div>

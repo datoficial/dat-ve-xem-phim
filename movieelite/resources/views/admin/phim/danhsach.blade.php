@@ -4,6 +4,7 @@
         <div class="card-header">Phim</div>
         <div class="card-body table-responsive">
             <p><a href="{{ route('admin.phim.them') }}" class="btn btn-info"><i class="bi bi-plus"></i> Thêm mới</a></p>
+            {{ $phim -> links() }}
             <table class="table table-bordered table-hover table-sm mb-0">
                 <thead>
                     <tr>
@@ -24,7 +25,7 @@
             <tbody>
             @foreach($phim as $value)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $loop->index + $phim -> firstItem() }}</td>
                     <td>{{ $value->TheLoaiPhim->tenloai }}</td>
                     <td>{{ $value->tenphim }}</td>
                     <td>{{ $value->tenphim_slug }}</td>
@@ -47,6 +48,7 @@
             @endforeach
             </tbody>
             </table>
+            {{ $phim -> links() }}
         </div>
     </div>
 @endsection

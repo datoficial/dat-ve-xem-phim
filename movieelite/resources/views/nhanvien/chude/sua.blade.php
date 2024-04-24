@@ -11,7 +11,7 @@
             <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
         @enderror
             </div>
-            <button type="submit" class="btn btn-primary"><i class="fa-light fa-save"></i> Cập nhật</button>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Cập nhật</button>
         </form>
         </div>
     </div>

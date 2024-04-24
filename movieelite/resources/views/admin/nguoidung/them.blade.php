@@ -72,7 +72,7 @@
                 <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
                 @enderror
                 </div>
-                <button type="submit" class="btn btn-primary"><i class="bi bi-person-plus"></i> Thêm người dùng</button>
+                <button type="submit" class="btn btn-primary"><i class="bi bi-plus"></i> Thêm người dùng</button>
             </form>
         </div>
     </div>

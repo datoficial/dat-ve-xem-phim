@@ -15,16 +15,34 @@ class VeController extends Controller
 {
     public function getDanhSach()
     {
-        $ve = Ve::paginate(25);
-        
-            $users = User::all(); 
-            $suatchieu = SuatChieu::all();
-            $phongchieu = PhongChieu::all();
-            $phim = Phim::all();
-        return view('nhanvien.ve.danhsach',compact('ve','users', 'suatchieu','phim','phongchieu'));
+        $ve = Ve::join('suatchieu', 've.suatchieu_id', '=', 'suatchieu.id')
+                 ->join('phongchieu', 'suatchieu.phongchieu_id', '=', 'phongchieu.id')
+                 ->join('rapchieu', 'phongchieu.rapchieu_id', '=', 'rapchieu.id')
+                 ->orderBy('rapchieu.tenrap') 
+                 ->paginate(20);
+        $thongkerapchieu = RapChieu::all()->map(function ($rapchieu) {
+            $so_luong_ve = 0;
+            $doanh_thu = 0;
+            $so_luong_ghe = 0;
+            foreach ($rapchieu->phongchieu as $phongchieu) {
+                foreach ($phongchieu->suatchieu as $suatchieu) {
+                    foreach ($suatchieu->ve as $ve) {
+                                $so_luong_ve ++;
+                                $so_luong_ghe += $ve->soluong;
+                                $doanh_thu += $ve->giave;
+                            }
+                        }
+                    }
+                    $rapchieu->so_luong_ve = $so_luong_ve;
+                    $rapchieu->doanh_thu = $doanh_thu;
+                    $rapchieu->so_luong_ghe = $so_luong_ghe;
+                
+                    return $rapchieu;
+                });
+                
+        return view('nhanvien.ve.danhsach', compact('ve','thongkerapchieu'));
     }
-
-
+    
     public function getSua($id)
     {
         $ve = Ve::find($id);

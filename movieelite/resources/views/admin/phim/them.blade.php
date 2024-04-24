@@ -8,7 +8,7 @@
             <div class="mb-3">
                 <label class="form-label" for="theloaiphim_id">Thể loại phim</label>
                 <select class="form-select @error('theloaiphim_id') is-invalid @enderror" id="theloaiphim_id" name="theloaiphim_id" required>
-                    <option value="">Chọn thể loại</option>
+                    <option>                           Chọn thể loại</option>
                     @foreach($theloaiphim as $theloai)
                         <option value="{{ $theloai->id }}" @if(old('theloaiphim_id') == $theloai->id) selected @endif>{{ $theloai->tenloai }}</option>
                     @endforeach
@@ -17,7 +17,6 @@
                     <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
                 @enderror
             </div>
-
             <div class="mb-3">
                 <label class="form-label" for="tenphim">Tên phim</label>
                 <input type="text" class="form-control @error('tenphim') is-invalid @enderror" id="tenphim" name="tenphim" value="{{ old('tenphim') }}" required />
@@ -81,7 +80,7 @@
                 @enderror
             </div>
 
-                <button type="submit" class="btn btn-primary"><i class="fa-light fa-save"></i> Thêm vào CSDL</button>
+                <button type="submit" class="btn btn-primary"><i class="bi bi-plus"></i> Thêm vào CSDL</button>
         </form>
         </div>
     </div>

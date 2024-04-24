@@ -12,7 +12,7 @@ class SuatChieuController extends Controller
 
     public function getDanhSach()
 {
-    $suatchieu = SuatChieu::with('PhongChieu')->orderBy('phongchieu_id')->paginate(25);
+    $suatchieu = SuatChieu::with('PhongChieu')->orderBy('phongchieu_id')->paginate(15);
     return view('admin.suatchieu.danhsach', compact('suatchieu'));
 }
 

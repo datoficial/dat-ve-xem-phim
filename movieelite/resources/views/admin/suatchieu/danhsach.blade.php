@@ -4,6 +4,7 @@
         <div class="card-header">Suất chiếu</div>
         <div class="card-body table-responsive">
             <p><a href="{{ route('admin.suatchieu.them') }}" class="btn btn-info"><i class="bi bi-plus"></i> Thêm mới</a></p>
+            {{ $suatchieu -> links() }}
             <table class="table table-bordered table-hover table-sm mb-0">
                 <thead>
                     <tr>
@@ -20,7 +21,7 @@
             <tbody>
             @foreach($suatchieu as $value)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $loop->index + $suatchieu -> firstItem() }}</td>
                     <td>{{ $value->PhongChieu->tenphong }}</td>
                     <td>{{ $value->Phim->tenphim }}</td>
                     <td>{{ $value->ngaychieu }}</td>
@@ -38,7 +39,9 @@
                 </tr>
             @endforeach
             </tbody>
-            </table>
+            </table><br>
+            {{ $suatchieu -> links() }}
+           
         </div>
     </div>
 @endsection

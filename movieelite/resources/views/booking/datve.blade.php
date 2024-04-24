@@ -28,13 +28,14 @@
                                   $ngaychieu = $suat->ngaychieu;
                                   $giobatdau = $suat->giobatdau;
                                   $today = \Carbon\Carbon::today()->toDateString();
+                                  $ngaychieu_formatted = \Carbon\Carbon::parse($ngaychieu)->format('d/m/Y');
                               @endphp
                               @if ($ngaychieu >= $today && !in_array($ngaychieu, $ngaychieu_da_xuat_hien))
                                   @php
                                       $ngaychieu_da_xuat_hien[] = $ngaychieu; 
                                   @endphp
                                   <div class="carousel-cell" id="{{ $suat->id }}" data-ngaychieu="{{ $ngaychieu }}" onclick="myFunction({{ $suat->id }}); selectDate('{{ $ngaychieu }}');">
-                                    <div class="date-numeric">{{ $suat->ngaychieu }}</div>
+                                    <div class="date-numeric">{{ $ngaychieu_formatted }}</div>
                                   </div>
                                 @endif
                                 @endforeach
@@ -123,11 +124,11 @@
                                 <div class="payment-row">
                                   <div class="col-50">
                                       <label for="total1">Số thẻ</label>
-                                      <input type="text" id="total1" name="total1" placeholder="Nhập tài khoản thanh toán" required />
+                                      <input type="text" id="total1" name="total1" placeholder="Nhập tài khoản thanh toán"  />
                                   </div>
                                   <div class="col-50">
                                       <label for="payment-method">Thanh toán qua:</label>
-                                      <select id="payment-method" name="payment-method" required>
+                                      <select id="payment-method" name="payment-method" >
                                           <option value="credit-card">Credit Card</option>
                                           <option value="paypal">PayPal</option>
                                           <option value="cash">Cash</option>
@@ -148,7 +149,7 @@
                 </div>
               </div>
             </div>
-            <button id="vnpay-button" class="home-page-btn">
+            <button id="vnpay-button" class="home-page-btn" style="width:auto;display:block;">
                 <span class="d-none d-sm-inline">Thanh toán VN pay</span>
             </button>
                 <input type="submit" name="previous-step" class="home-page-btn" value="Xác nhận thanh toán" />

@@ -23,22 +23,14 @@ class HomeController extends Controller
      * Create a new controller instance.
      *
      * @return void
-     */
 
-
-    /**
-     * Show the application dashboard.
-     *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function getPhimTheoRap($tenrap_slug = '')
     {
-            // Lấy thông tin rạp chiếu tương ứng với slug
+  
             $rapchieu = RapChieu::where('tenrap_slug', $tenrap_slug)->first();
     
-            // Kiểm tra xem rạp chiếu có tồn tại không. Nếu không tồn tại, điều hướng hoặc xử lý tùy thuộc vào yêu cầu của bạn
-
-                // Lấy danh sách phim tương ứng với rạp chiếu
                 $phim = Phim::whereHas('SuatChieu', function ($query) use ($rapchieu) {
                     $query->whereHas('phongchieu', function ($subQuery) use ($rapchieu) {
                         $subQuery->where('rapchieu_id', $rapchieu->id);
@@ -48,7 +40,8 @@ class HomeController extends Controller
                 return view('frontend.phimtheorap', compact('phim', 'rapchieu'));
 
     }
-    
+
+
     public function getTimKiem(Request $request)
     {
         $searchTerm = $request->input('search');
@@ -58,6 +51,7 @@ class HomeController extends Controller
         return view('frontend.timkiemphim', compact('phim','searchTerm'));
        
     }
+
     public function getCapNhat()
     {
     

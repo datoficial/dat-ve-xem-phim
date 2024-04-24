@@ -208,7 +208,7 @@
 					<div class="container">
 						<div class="copyright-footer">
 							<div class="columns text-lg-left">
-								<p>&copy; 2021 MovieElite. Bản quyền thuộc về Nguyễn Phát Đạt</p>
+								<p>&copy; 2024 MovieElite. Bản quyền thuộc về Nguyễn Phát Đạt</p>
 						</div>
 
 							<ul class="social text-lg-right">

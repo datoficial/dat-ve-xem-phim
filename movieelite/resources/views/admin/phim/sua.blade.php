@@ -85,7 +85,7 @@
                 @enderror
                     </div>
 
-                <button type="submit" class="btn btn-primary"><i class="fa-light fa-save"></i> Sửa vào CSDL</button>
+                <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Sửa vào CSDL</button>
         </form>
         </div>
     </div>

@@ -15,7 +15,7 @@ class PhimController extends Controller
 {
     public function getDanhSach()
     {
-        $phim = Phim::paginate(25);
+        $phim = Phim::paginate(10);
         return view('admin.phim.danhsach', compact('phim'));
     }
     public function getThem()
