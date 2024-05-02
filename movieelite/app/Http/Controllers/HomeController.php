@@ -16,6 +16,7 @@ use App\Models\ChuDe;
 use App\Models\BaiViet;
 use App\Models\BinhLuan;
 use Illuminate\Support\Carbon;
+use Socialite;
 
 class HomeController extends Controller
 {
@@ -38,6 +39,21 @@ class HomeController extends Controller
                 })->with('TheLoaiPhim', 'BaiViet')->get();
     
                 return view('frontend.phimtheorap', compact('phim', 'rapchieu'));
+
+    }
+    public function getPhimTheoLoai($tenloai_slug = '')
+    {
+  
+        if (empty($tenloai_slug)) 
+        {
+            $phim = Phim::all()
+                ->paginate(20);
+        } 
+        else {
+            $theloaiphim = TheLoaiPhim::where('tenloai_slug', $tenloai_slug)->first();          
+            $phim = Phim::where('theloaiphim_id', $theloaiphim->id) ->paginate(12);
+        }
+        return view('frontend.phimtheoloai', compact('phim', 'theloaiphim'));
 
     }
 
@@ -154,4 +170,47 @@ class HomeController extends Controller
     {
         return view('user.dangnhap');
     }
+    public function getGoogleLogin()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+    public function getGoogleCallback()
+    {
+        try
+        {
+            $user = Socialite::driver('google')
+            ->setHttpClient(new \GuzzleHttp\Client(['verify' => false]))
+            ->stateless()
+            ->user();
+        }
+        catch(Exception $e)
+        {
+            return redirect()->route('user.dangnhap')->with('warning', 'Lỗi xác thực. Xin vui lòng thử lại!');
+        }
+        $existingUser = User::where('email', $user->email)->first();
+        if($existingUser)
+        {
+        // Nếu người dùng đã tồn tại thì đăng nhập
+            Auth::login($existingUser, true);
+            return redirect()->route('user.home');
+        }
+        else
+        {
+        // Nếu chưa tồn tại người dùng thì thêm mới
+            $newUser = User::create([
+            'name' => $user->name,
+            'email' => $user->email,
+            'username' => Str::before($user->email, '@'),
+            'password' => Hash::make('larashop@2023'),
+            'gioitinh' => "Nam",
+            'namsinh' => "2000-01-01",
+            'sodienthoai' => "0000000000",
+            'diachi' => "a",
+            'hinhanh' => "a.jpg",
+            ]);
+            Auth::login($newUser, true);
+            return redirect()->route('user.home');
+        }
+    }
+
 }

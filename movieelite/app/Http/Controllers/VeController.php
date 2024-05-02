@@ -10,37 +10,44 @@ use App\Models\Phim;
 use App\Models\RapChieu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class VeController extends Controller
 {
-    public function getDanhSach()
+    public function getDanhSach(Request $request)
     {
         $ve = Ve::join('suatchieu', 've.suatchieu_id', '=', 'suatchieu.id')
-                 ->join('phongchieu', 'suatchieu.phongchieu_id', '=', 'phongchieu.id')
-                 ->join('rapchieu', 'phongchieu.rapchieu_id', '=', 'rapchieu.id')
-                 ->orderBy('rapchieu.tenrap') 
-                 ->paginate(20);
-        $thongkerapchieu = RapChieu::all()->map(function ($rapchieu) {
+        ->join('phongchieu', 'suatchieu.phongchieu_id', '=', 'phongchieu.id')
+        ->join('rapchieu', 'phongchieu.rapchieu_id', '=', 'rapchieu.id')
+        ->orderBy('ngayban') 
+        ->paginate(20);
+    
+        $ngay_a = Carbon::parse($request->input('ngay_a'))->toDateString();
+        $ngay_b = Carbon::parse($request->input('ngay_b'))->toDateString();
+        $thongkerapchieu = RapChieu::all()->map(function ($rapchieu) use ($ngay_a, $ngay_b) {
             $so_luong_ve = 0;
             $doanh_thu = 0;
             $so_luong_ghe = 0;
+        
             foreach ($rapchieu->phongchieu as $phongchieu) {
                 foreach ($phongchieu->suatchieu as $suatchieu) {
                     foreach ($suatchieu->ve as $ve) {
-                                $so_luong_ve ++;
-                                $so_luong_ghe += $ve->soluong;
-                                $doanh_thu += $ve->giave;
-                            }
+                        $ngay_ban = Carbon::parse($ve->ngayban);
+                        if ($ngay_ban->greaterThanOrEqualTo($ngay_a) && $ngay_ban->lessThanOrEqualTo($ngay_b)) {
+                            $so_luong_ve++;
+                            $so_luong_ghe += $ve->soluong;
+                            $doanh_thu += $ve->giave;
                         }
                     }
-                    $rapchieu->so_luong_ve = $so_luong_ve;
-                    $rapchieu->doanh_thu = $doanh_thu;
-                    $rapchieu->so_luong_ghe = $so_luong_ghe;
-                
-                    return $rapchieu;
-                });
-                
-        return view('nhanvien.ve.danhsach', compact('ve','thongkerapchieu'));
+                }
+            }
+        
+            $rapchieu->so_luong_ve = $so_luong_ve;
+            $rapchieu->doanh_thu = $doanh_thu;
+            $rapchieu->so_luong_ghe = $so_luong_ghe;
+            return $rapchieu;
+        });
+                return view('nhanvien.ve.danhsach', compact('ve', 'thongkerapchieu','ngay_a','ngay_b'));    
     }
     
     public function getSua($id)

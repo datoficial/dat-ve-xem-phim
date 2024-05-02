@@ -28,18 +28,18 @@ Ngày đăng: <strong>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $value->
 <td class="text-center" title="Trạng thái kiểm duyệt">
 <a href="{{ route('nhanvien.binhluan.kiemduyet', ['id' => $value->id]) }}">
 @if($value->kiemduyet == 1)
-<i class="fa-light fa-lg fa-circle-check"></i>
+<i class="bi bi-check-circle"></i>
 @else
-<i class="fa-light fa-lg fa-circle-xmark text-danger"></i>
+<i class="bi bi-check-circle-fill"></i>
 @endif
 </a>
 </td>
 <td class="text-center" title="Trạng thái hiển thị">
 <a href="{{ route('nhanvien.binhluan.kichhoat', ['id' => $value->id]) }}">
 @if($value->kichhoat == 1)
-<i class="fa-light fa-lg fa-eye"></i>
+<i class="bi bi-eye"></i>
 @else
-<i class="fa-light fa-lg fa-eye-slash text-danger"></i>
+<i class="bi bi-eye-slash"></i>
 @endif
 </a>
 </td>

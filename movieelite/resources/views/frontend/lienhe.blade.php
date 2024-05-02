@@ -2,23 +2,24 @@
 @section('title', 'Liên hệ')
 @section('content')
 		
-		<div class="bg-secondary py-4">
-			<div class="container d-lg-flex justify-content-between py-2 py-lg-3">
-				<div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
-					<nav aria-label="breadcrumb">
-						<ol class="breadcrumb flex-lg-nowrap justify-content-center justify-content-lg-start">
-							<li class="breadcrumb-item">
-								<a class="text-nowrap" href="{{route('frontend.home')}}"><i class="ci-home"></i>Trang chủ</a>
-							</li>
-							<li class="breadcrumb-item text-nowrap active" aria-current="page">Liên hệ</li>
-						</ol>
-					</nav>
-				</div>
-				<div class="order-lg-1 pe-lg-4 text-center text-lg-start">
-					<h1 class="h3 mb-0">Liên hệ</h1>
+			<div class="bg-secondary pt-12 mt-8"> <!-- Increased margin-top with mt-8 -->
+				<div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+					<div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+						<nav aria-label="breadcrumb">
+							<ol class="breadcrumb flex-lg-nowrap justify-content-center justify-content-lg-start">
+								<li class="breadcrumb-item">
+									<a class="text-nowrap" href="{{route('frontend.home')}}">Trang chủ</a>
+								</li>
+								<li class="breadcrumb-item text-nowrap active" aria-current="page">Liên hệ</li>
+							</ol>
+						</nav>
+					</div>
+					<div class="order-lg-1 pe-lg-4 text-center text-lg-start">
+						<h1 class="h3 mb-0">Liên hệ</h1>
+					</div>
 				</div>
 			</div>
-		</div>
+
 		
 		<section class="container-fluid pt-grid-gutter">
 			<div class="row">
@@ -26,7 +27,7 @@
 					<a class="card h-100" href="#map" data-scroll>
 						<div class="card-body text-center">
 						
-							<h3 class="h6 mb-2">Địa chỉ cửa hàng</h3>
+							<h3 class="h6 mb-2">Địa chỉ</h3>
 							<p class="fs-sm text-muted">69 Trần Hưng Đạo, Long Xuyên, An Giang</p>
 							<div class="fs-sm text-primary">Xem bản đồ</div>
 						</div>
@@ -38,8 +39,8 @@
 					
 							<h3 class="h6 mb-3">Giờ làm việc</h3>
 							<ul class="list-unstyled fs-sm text-muted mb-0">
-								<li>Thứ 2 - Thứ 6: 08:00 AM - 05:00 PM</li>
-								<li class="mb-0">Thứ 7 - Chủ Nhật: 10:00 AM - 21:00 PM</li>
+								<li>Thứ 2 - Thứ 6: Cả ngày</li>
+								<li class="mb-0">Thứ 7 - Chủ Nhật: Cả ngày</li>
 							</ul>
 						</div>
 					</div>

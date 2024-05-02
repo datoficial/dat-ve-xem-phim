@@ -23,7 +23,7 @@ class BinhLuanController extends Controller
     {// Kiểm tra
         $request->validate([
         'baiviet_id' => ['required', 'integer'],
-        'noidungbinhluan' => ['required', 'string', 'min:20'],
+        'noidungbinhluan' => ['required', 'string'],
     ]);
         $orm = new BinhLuan();
         $orm->baiviet_id = $request->baiviet_id;
@@ -44,7 +44,7 @@ class BinhLuanController extends Controller
     // Kiểm tra
         $request->validate([
         'baiviet_id' => ['required', 'integer'],
-        'noidungbinhluan' => ['required', 'string', 'min:20'],
+        'noidungbinhluan' => ['required', 'string'],
         ]);
         $orm = BinhLuan::find($id);
         $orm->baiviet_id = $request->baiviet_id;

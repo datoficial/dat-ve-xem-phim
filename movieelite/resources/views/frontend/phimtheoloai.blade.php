@@ -9,8 +9,7 @@
             <br>
             <br>
             <div id='nz-div'>
-                <h3 class="tde"><span class="null">Danh sách phim của rạp {{$rapchieu->tenrap}}</span></h3>
-                <cite><i class="bi bi-geo-alt"></i> {{$rapchieu->diachi}}</cite>
+                <h3 class="tde"><span class="null">Danh sách phim theo loại {{$theloaiphim->tenloai}}</span></h3>
             </div>
             <br>
                 <div class="product-grid">
@@ -133,55 +132,7 @@
 <link href="//fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap"
     rel="stylesheet">
 
-        <style>
-            div#nz-div {
-                border-bottom: 2px solid red;
-                margin-bottom: 40px;
-                display: block;
-                position: relative;
-            }
-
-            #nz-div h3.tde {
-                margin: 0;
-                font-size: 16px;
-                line-height: 20px;
-                display: inline-block;
-                text-transform: uppercase;
-                position: relative;
-                margin-right: 200px; 
-            }
-
-            #nz-div h3.tde:after {
-                content: "";
-                width: 0;
-                height: 0;
-                border-top: 40px solid transparent;
-                border-left: 20px solid #EA3A3C;
-                border-bottom: 0px solid transparent;
-                border-right: 0 solid transparent;
-                position: absolute;
-                top: 0px;
-                right: -20px;
-            }
-
-            #nz-div h3.tde span {
-                background: #EA3A3C;
-                padding: 10px 20px 8px 20px;
-                color: white;
-                position: relative;
-                display: inline-block;
-                margin: 0;
-            }
-
-            #nz-div h3.tde cite {
-                position: absolute;
-                top: 0;
-                right: 0;
-                margin: 0;
-                color: white;
-                line-height: 20px;
-            }
-        </style>
+        
 
         
 @endsection

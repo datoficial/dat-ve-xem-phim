@@ -74,4 +74,6 @@ class RegisterController extends Controller
             'diachi' => $data['diachi'],
         ]);
     }
+    
+    
 }

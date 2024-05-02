@@ -23,7 +23,6 @@ class UserController extends Controller
         'role' => ['required'],
         'password' => ['required', 'min:4', 'confirmed'],
         ]);
-
         $orm = new User();
         $orm->name = $request->name;
         $orm->username = Str::before($request->email, '@');
@@ -58,6 +57,7 @@ class UserController extends Controller
         $orm->namsinh = $request->namsinh;
         $orm->sodienthoai = $request->sodienthoai;
         $orm->diachi = $request->diachi;
+        if(!empty($path)) $orm->hinhanh = $path;
         $orm->role = $request->role;
         if(!empty($request->password)) $orm->password = Hash::make($request->password);
         $orm->save();

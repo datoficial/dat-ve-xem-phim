@@ -16,6 +16,9 @@ use App\Http\Controllers\DatVeController;
 use App\Http\Controllers\UserController;
 
 Auth::routes();
+// Google OAuth
+Route::get('/login/google', [HomeController::class, 'getGoogleLogin'])->name('google.login');
+Route::get('/login/google/callback', [HomeController::class, 'getGoogleCallback'])->name('google.callback');
 
 Route::name('frontend.')->group(function() {
         // Trang chủ
@@ -23,6 +26,8 @@ Route::name('frontend.')->group(function() {
         Route::get('/home', [HomeController::class, 'getHome'])->name('home');
         Route::get('/cap-nhat', [HomeController::class, 'getCapNhat'])->name('capnhat');
         Route::get('/phim-cua-rap/{tenrap_slug}', [HomeController::class, 'getPhimTheoRap'])->name('phim.theorap');
+        Route::get('/phim-theo-loai/{tenloai_slug}', [HomeController::class, 'getPhimTheoLoai'])->name('phim.theoloai');
+
         Route::get('/lien-he', [HomeController::class, 'getLienHe'])->name('lienhe');
 
         Route::get('/tim-kiem', [HomeController::class, 'getTimKiem'])->name('timkiem');

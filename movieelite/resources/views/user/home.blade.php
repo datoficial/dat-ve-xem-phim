@@ -27,9 +27,6 @@
 					<div class="bg-white rounded-3 shadow-lg pt-1 mb-5 mb-lg-0">
 						<div class="d-md-flex justify-content-between align-items-center text-center text-md-start p-4">
 							<div class="d-md-flex align-items-center">
-								<div class="img-thumbnail rounded-circle position-relative flex-shrink-0 mx-auto mb-2 mx-md-0 mb-md-0" style="width:6.375rem;">
-									<img class="rounded-circle" src="{{ asset('public/avatar1.jpg') }}" />
-								</div>
 								<div class="ps-md-3">
 									<h3 class="fs-base mb-0">{{ $nguoidung->name }}</h3>
 									<span class="text-accent fs-sm">{{ $nguoidung->email }}</span>
@@ -57,36 +54,7 @@
                                         </a>
                                     </li>
                                 @endif
-								<li class="border-bottom mb-0">
-									<a class="nav-link-style d-flex align-items-center px-4 py-3" href="#">
-										Phim yêu thích<span class="fs-sm text-muted ms-auto">0</span>
-									</a>
-								</li>
-								<li class="mb-0">
-									<a class="nav-link-style d-flex align-items-center px-4 py-3" href="#">
-										Bình luận bài viết<span class="fs-sm text-muted ms-auto">0</span>
-									</a>
-								</li>
-							</ul>
-							<div class="bg-secondary px-4 py-3">
-								<h3 class="fs-sm mb-0 text-muted">Thiết lập tài khoản</h3>
-							</div>
-							<ul class="list-unstyled mb-0">
-								<li class="border-bottom mb-0">
-									<a class="nav-link-style d-flex align-items-center px-4 py-3 active" href="{{ route('user.hosocanhan') }}">
-										Hồ sơ cá nhân
-									</a>
-								</li>
-								<li class="border-bottom mb-0">
-									<a class="nav-link-style d-flex align-items-center px-4 py-3" href="#">
-										Sổ địa chỉ
-									</a>
-								</li>
-								<li class="mb-0">
-									<a class="nav-link-style d-flex align-items-center px-4 py-3" href="#">
-										Phương thức thanh toán
-									</a>
-								</li>
+
 								<li class="d-lg-none border-top mb-0">
 									<a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
 										Đăng xuất
@@ -118,17 +86,6 @@
                     @endif
                     <form action="{{ route('user.hosocanhan') }}" method="post" class="needs-validation" novalidate>
                     @csrf
-                    <div class="bg-secondary rounded-3 p-4 mb-4">
-                        <div class="d-flex align-items-center">
-                        <img class="rounded" src="{{ asset('public/avatar1.jpg') }}" width="90" />
-                        <div class="ps-3">
-                        <button class="btn btn-light btn-shadow btn-sm mb-2" type="button">
-                        Đổi ảnh đại diện
-                        </button>
-                        <div class="p mb-0 fs-ms text-muted">Tải lên hình ảnh JPG, GIF hoặc PNG. Yêu cầu kích thước 300x300.</div>
-                        </div>
-                        </div>
-                    </div>
                         <div class="row gx-4 gy-3">
                         <div class="col-sm-6">
                         <label class="form-label" for="name">Họ và tên</label>
@@ -180,7 +137,7 @@
                     </div>
                     <div class="col-6">
                         <label class="form-label" for="namsinh">Năm sinh</label>
-                        <input type="text" class="form-control @error('namsinh') is-invalid @enderror" id="namsinh" name="namsinh" value="{{ $nguoidung->namsinh }}">
+                        <input type="date" class="form-control @error('namsinh') is-invalid @enderror" id="namsinh" name="namsinh" value="{{ $nguoidung->namsinh }}">
                         @error('namsinh')
                             <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
                         @enderror
@@ -215,4 +172,33 @@
                 </section>
 			</div>
 		</div>
+@endsection
+@section('javascript')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const changeAvatarBtn = document.getElementById('changeAvatarBtn');
+    const avatarInput = document.createElement('input');
+    avatarInput.type = 'file';
+    avatarInput.accept = 'image/*';
+    avatarInput.style.display = 'none';
+    document.body.appendChild(avatarInput);
+
+    changeAvatarBtn.addEventListener('click', function() {
+        avatarInput.click();
+    });
+
+    avatarInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const avatar = document.getElementById('avatar');
+                avatar.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+});
+
+    </script>
 @endsection

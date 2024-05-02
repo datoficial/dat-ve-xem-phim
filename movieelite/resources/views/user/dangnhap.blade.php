@@ -49,10 +49,8 @@
         <form method="post" action="{{ route('login') }}" class="needs-validation" novalidate>
 				<h1>Đăng nhập</h1>
 				<div class="social-container">
-					<a href="#" class="social" style="color: var(--theme-title);"><i class="fab fa-facebook-f"></i></a>
-					<a href="#" class="social" style="color: var(--theme-title);"><i
+					<a href="{{ route('google.login') }}" class="social" style="color: var(--theme-title);"><i
 							class="fab fa-google-plus-g"></i></a>
-					<a href="#" class="social" style="color: var(--theme-title);"><i class="fab fa-linkedin-in"></i></a>
 				</div>
 				<span>hoặc sử dụng tài khoản của bạn</span>
                 @csrf
@@ -68,9 +66,6 @@
                     @endif
                         <input type="text" class="form-control rounded-start {{ ($errors->has('email') || $errors->has('username')) ? 'is-invalid' : '' }}" id="email" name="email" value="{{ old('email') }}" placeholder="Email" required />
                         <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Mật khẩu" required />
-                    @if (Route::has('password.request'))
-                        <a class="nav-link-inline fs-sm" href="#">Quên mật khẩu?</a>
-                    @endif
 				<button>Đăng nhập</button>
 			</form>
 		</div>

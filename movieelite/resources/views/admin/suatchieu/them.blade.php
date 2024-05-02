@@ -32,7 +32,7 @@
 
             <div class="mb-3">
                 <label class="form-label" for="ngaychieu">Ngày chiếu</label>
-                <input type="text" class="form-control @error('ngaychieu') is-invalid @enderror" id="ngaychieu" name="ngaychieu" placeholder="yyyy-mm-dd" value="{{ old('ngaychieu') }}" required />
+                <input type="date" class="form-control @error('ngaychieu') is-invalid @enderror" id="ngaychieu" name="ngaychieu" placeholder="yyyy-mm-dd" value="{{ old('ngaychieu') }}" required />
             @error('ngaychieu')
                 <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
             @enderror
