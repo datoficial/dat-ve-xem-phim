@@ -173,13 +173,10 @@ public function postVNPay(Request $request)
             $ve->save();
     
             // Lưu đường dẫn của ảnh mã vạch vào session
-            // Lưu đường dẫn của ảnh mã vạch vào session
             session(['qrCodeFileName' => 'qrcodes' . $barcodeFilename]);
     
-            // Redirect đến trang "datvethanhcong"
             return redirect()->route('booking.datvethanhcong');
         } else {
-            // Xử lý lỗi khi không thể lưu vé vào cơ sở dữ liệu
             return response()->json(['error' => 'Không thể lưu vé vào cơ sở dữ liệu'], 500);
         }
     }
